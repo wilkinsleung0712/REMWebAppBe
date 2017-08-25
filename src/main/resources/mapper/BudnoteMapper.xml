@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.colliers.mri.mapper.BudnoteMapper">
+  <resultMap id="BaseResultMap" type="com.colliers.mri.pojo.Budnote">
+    <id column="ACCTNUM" jdbcType="CHAR" property="acctnum" />
+    <id column="ENTITYID" jdbcType="CHAR" property="entityid" />
+    <id column="BUDTYPE" jdbcType="CHAR" property="budtype" />
+    <id column="ENDPD" jdbcType="CHAR" property="endpd" />
+    <id column="BASIS" jdbcType="CHAR" property="basis" />
+    <id column="NOTETYPE" jdbcType="CHAR" property="notetype" />
+    <id column="DEPARTMENT" jdbcType="CHAR" property="department" />
+    <result column="BEGPD" jdbcType="CHAR" property="begpd" />
+    <result column="LASTDATE" jdbcType="TIMESTAMP" property="lastdate" />
+    <result column="USERID" jdbcType="CHAR" property="userid" />
+    <result column="RECUSERID" jdbcType="CHAR" property="recuserid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.colliers.mri.pojo.Budnote">
+    <result column="NOTETEXT" jdbcType="LONGVARCHAR" property="notetext" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ACCTNUM, ENTITYID, BUDTYPE, ENDPD, BASIS, NOTETYPE, DEPARTMENT, BEGPD, LASTDATE, 
+    USERID, RECUSERID
+  </sql>
+  <sql id="Blob_Column_List">
+    NOTETEXT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.colliers.mri.pojo.BudnoteExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from BUDNOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.colliers.mri.pojo.BudnoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BUDNOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.colliers.mri.pojo.BudnoteKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from BUDNOTE
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+      and ENTITYID = #{entityid,jdbcType=CHAR}
+      and BUDTYPE = #{budtype,jdbcType=CHAR}
+      and ENDPD = #{endpd,jdbcType=CHAR}
+      and BASIS = #{basis,jdbcType=CHAR}
+      and NOTETYPE = #{notetype,jdbcType=CHAR}
+      and DEPARTMENT = #{department,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.colliers.mri.pojo.BudnoteKey">
+    delete from BUDNOTE
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+      and ENTITYID = #{entityid,jdbcType=CHAR}
+      and BUDTYPE = #{budtype,jdbcType=CHAR}
+      and ENDPD = #{endpd,jdbcType=CHAR}
+      and BASIS = #{basis,jdbcType=CHAR}
+      and NOTETYPE = #{notetype,jdbcType=CHAR}
+      and DEPARTMENT = #{department,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.colliers.mri.pojo.BudnoteExample">
+    delete from BUDNOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.colliers.mri.pojo.Budnote">
+    insert into BUDNOTE (ACCTNUM, ENTITYID, BUDTYPE, 
+      ENDPD, BASIS, NOTETYPE, DEPARTMENT, 
+      BEGPD, LASTDATE, USERID, 
+      RECUSERID, NOTETEXT)
+    values (#{acctnum,jdbcType=CHAR}, #{entityid,jdbcType=CHAR}, #{budtype,jdbcType=CHAR}, 
+      #{endpd,jdbcType=CHAR}, #{basis,jdbcType=CHAR}, #{notetype,jdbcType=CHAR}, #{department,jdbcType=CHAR}, 
+      #{begpd,jdbcType=CHAR}, #{lastdate,jdbcType=TIMESTAMP}, #{userid,jdbcType=CHAR}, 
+      #{recuserid,jdbcType=CHAR}, #{notetext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.colliers.mri.pojo.Budnote">
+    insert into BUDNOTE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acctnum != null">
+        ACCTNUM,
+      </if>
+      <if test="entityid != null">
+        ENTITYID,
+      </if>
+      <if test="budtype != null">
+        BUDTYPE,
+      </if>
+      <if test="endpd != null">
+        ENDPD,
+      </if>
+      <if test="basis != null">
+        BASIS,
+      </if>
+      <if test="notetype != null">
+        NOTETYPE,
+      </if>
+      <if test="department != null">
+        DEPARTMENT,
+      </if>
+      <if test="begpd != null">
+        BEGPD,
+      </if>
+      <if test="lastdate != null">
+        LASTDATE,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="recuserid != null">
+        RECUSERID,
+      </if>
+      <if test="notetext != null">
+        NOTETEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acctnum != null">
+        #{acctnum,jdbcType=CHAR},
+      </if>
+      <if test="entityid != null">
+        #{entityid,jdbcType=CHAR},
+      </if>
+      <if test="budtype != null">
+        #{budtype,jdbcType=CHAR},
+      </if>
+      <if test="endpd != null">
+        #{endpd,jdbcType=CHAR},
+      </if>
+      <if test="basis != null">
+        #{basis,jdbcType=CHAR},
+      </if>
+      <if test="notetype != null">
+        #{notetype,jdbcType=CHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=CHAR},
+      </if>
+      <if test="begpd != null">
+        #{begpd,jdbcType=CHAR},
+      </if>
+      <if test="lastdate != null">
+        #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="recuserid != null">
+        #{recuserid,jdbcType=CHAR},
+      </if>
+      <if test="notetext != null">
+        #{notetext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.colliers.mri.pojo.BudnoteExample" resultType="java.lang.Long">
+    select count(*) from BUDNOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BUDNOTE
+    <set>
+      <if test="record.acctnum != null">
+        ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      </if>
+      <if test="record.entityid != null">
+        ENTITYID = #{record.entityid,jdbcType=CHAR},
+      </if>
+      <if test="record.budtype != null">
+        BUDTYPE = #{record.budtype,jdbcType=CHAR},
+      </if>
+      <if test="record.endpd != null">
+        ENDPD = #{record.endpd,jdbcType=CHAR},
+      </if>
+      <if test="record.basis != null">
+        BASIS = #{record.basis,jdbcType=CHAR},
+      </if>
+      <if test="record.notetype != null">
+        NOTETYPE = #{record.notetype,jdbcType=CHAR},
+      </if>
+      <if test="record.department != null">
+        DEPARTMENT = #{record.department,jdbcType=CHAR},
+      </if>
+      <if test="record.begpd != null">
+        BEGPD = #{record.begpd,jdbcType=CHAR},
+      </if>
+      <if test="record.lastdate != null">
+        LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=CHAR},
+      </if>
+      <if test="record.recuserid != null">
+        RECUSERID = #{record.recuserid,jdbcType=CHAR},
+      </if>
+      <if test="record.notetext != null">
+        NOTETEXT = #{record.notetext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update BUDNOTE
+    set ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      ENTITYID = #{record.entityid,jdbcType=CHAR},
+      BUDTYPE = #{record.budtype,jdbcType=CHAR},
+      ENDPD = #{record.endpd,jdbcType=CHAR},
+      BASIS = #{record.basis,jdbcType=CHAR},
+      NOTETYPE = #{record.notetype,jdbcType=CHAR},
+      DEPARTMENT = #{record.department,jdbcType=CHAR},
+      BEGPD = #{record.begpd,jdbcType=CHAR},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      USERID = #{record.userid,jdbcType=CHAR},
+      RECUSERID = #{record.recuserid,jdbcType=CHAR},
+      NOTETEXT = #{record.notetext,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BUDNOTE
+    set ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      ENTITYID = #{record.entityid,jdbcType=CHAR},
+      BUDTYPE = #{record.budtype,jdbcType=CHAR},
+      ENDPD = #{record.endpd,jdbcType=CHAR},
+      BASIS = #{record.basis,jdbcType=CHAR},
+      NOTETYPE = #{record.notetype,jdbcType=CHAR},
+      DEPARTMENT = #{record.department,jdbcType=CHAR},
+      BEGPD = #{record.begpd,jdbcType=CHAR},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      USERID = #{record.userid,jdbcType=CHAR},
+      RECUSERID = #{record.recuserid,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.colliers.mri.pojo.Budnote">
+    update BUDNOTE
+    <set>
+      <if test="begpd != null">
+        BEGPD = #{begpd,jdbcType=CHAR},
+      </if>
+      <if test="lastdate != null">
+        LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="recuserid != null">
+        RECUSERID = #{recuserid,jdbcType=CHAR},
+      </if>
+      <if test="notetext != null">
+        NOTETEXT = #{notetext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+      and ENTITYID = #{entityid,jdbcType=CHAR}
+      and BUDTYPE = #{budtype,jdbcType=CHAR}
+      and ENDPD = #{endpd,jdbcType=CHAR}
+      and BASIS = #{basis,jdbcType=CHAR}
+      and NOTETYPE = #{notetype,jdbcType=CHAR}
+      and DEPARTMENT = #{department,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.colliers.mri.pojo.Budnote">
+    update BUDNOTE
+    set BEGPD = #{begpd,jdbcType=CHAR},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      USERID = #{userid,jdbcType=CHAR},
+      RECUSERID = #{recuserid,jdbcType=CHAR},
+      NOTETEXT = #{notetext,jdbcType=LONGVARCHAR}
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+      and ENTITYID = #{entityid,jdbcType=CHAR}
+      and BUDTYPE = #{budtype,jdbcType=CHAR}
+      and ENDPD = #{endpd,jdbcType=CHAR}
+      and BASIS = #{basis,jdbcType=CHAR}
+      and NOTETYPE = #{notetype,jdbcType=CHAR}
+      and DEPARTMENT = #{department,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.colliers.mri.pojo.Budnote">
+    update BUDNOTE
+    set BEGPD = #{begpd,jdbcType=CHAR},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      USERID = #{userid,jdbcType=CHAR},
+      RECUSERID = #{recuserid,jdbcType=CHAR}
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+      and ENTITYID = #{entityid,jdbcType=CHAR}
+      and BUDTYPE = #{budtype,jdbcType=CHAR}
+      and ENDPD = #{endpd,jdbcType=CHAR}
+      and BASIS = #{basis,jdbcType=CHAR}
+      and NOTETYPE = #{notetype,jdbcType=CHAR}
+      and DEPARTMENT = #{department,jdbcType=CHAR}
+  </update>
+</mapper>

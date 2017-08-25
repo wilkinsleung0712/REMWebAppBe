@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.colliers.mri.mapper.GarhMapper">
+  <resultMap id="BaseResultMap" type="com.colliers.mri.pojo.Garh">
+    <id column="GROUPID" jdbcType="CHAR" property="groupid" />
+    <id column="LEDGCODE" jdbcType="CHAR" property="ledgcode" />
+    <result column="DESCRPTN" jdbcType="CHAR" property="descrptn" />
+    <result column="LASTDATE" jdbcType="TIMESTAMP" property="lastdate" />
+    <result column="USERID" jdbcType="CHAR" property="userid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    GROUPID, LEDGCODE, DESCRPTN, LASTDATE, USERID
+  </sql>
+  <select id="selectByExample" parameterType="com.colliers.mri.pojo.GarhExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from GARH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.colliers.mri.pojo.GarhKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GARH
+    where GROUPID = #{groupid,jdbcType=CHAR}
+      and LEDGCODE = #{ledgcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.colliers.mri.pojo.GarhKey">
+    delete from GARH
+    where GROUPID = #{groupid,jdbcType=CHAR}
+      and LEDGCODE = #{ledgcode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.colliers.mri.pojo.GarhExample">
+    delete from GARH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.colliers.mri.pojo.Garh">
+    insert into GARH (GROUPID, LEDGCODE, DESCRPTN, 
+      LASTDATE, USERID)
+    values (#{groupid,jdbcType=CHAR}, #{ledgcode,jdbcType=CHAR}, #{descrptn,jdbcType=CHAR}, 
+      #{lastdate,jdbcType=TIMESTAMP}, #{userid,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.colliers.mri.pojo.Garh">
+    insert into GARH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupid != null">
+        GROUPID,
+      </if>
+      <if test="ledgcode != null">
+        LEDGCODE,
+      </if>
+      <if test="descrptn != null">
+        DESCRPTN,
+      </if>
+      <if test="lastdate != null">
+        LASTDATE,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupid != null">
+        #{groupid,jdbcType=CHAR},
+      </if>
+      <if test="ledgcode != null">
+        #{ledgcode,jdbcType=CHAR},
+      </if>
+      <if test="descrptn != null">
+        #{descrptn,jdbcType=CHAR},
+      </if>
+      <if test="lastdate != null">
+        #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.colliers.mri.pojo.GarhExample" resultType="java.lang.Long">
+    select count(*) from GARH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update GARH
+    <set>
+      <if test="record.groupid != null">
+        GROUPID = #{record.groupid,jdbcType=CHAR},
+      </if>
+      <if test="record.ledgcode != null">
+        LEDGCODE = #{record.ledgcode,jdbcType=CHAR},
+      </if>
+      <if test="record.descrptn != null">
+        DESCRPTN = #{record.descrptn,jdbcType=CHAR},
+      </if>
+      <if test="record.lastdate != null">
+        LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update GARH
+    set GROUPID = #{record.groupid,jdbcType=CHAR},
+      LEDGCODE = #{record.ledgcode,jdbcType=CHAR},
+      DESCRPTN = #{record.descrptn,jdbcType=CHAR},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      USERID = #{record.userid,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.colliers.mri.pojo.Garh">
+    update GARH
+    <set>
+      <if test="descrptn != null">
+        DESCRPTN = #{descrptn,jdbcType=CHAR},
+      </if>
+      <if test="lastdate != null">
+        LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=CHAR},
+      </if>
+    </set>
+    where GROUPID = #{groupid,jdbcType=CHAR}
+      and LEDGCODE = #{ledgcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.colliers.mri.pojo.Garh">
+    update GARH
+    set DESCRPTN = #{descrptn,jdbcType=CHAR},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      USERID = #{userid,jdbcType=CHAR}
+    where GROUPID = #{groupid,jdbcType=CHAR}
+      and LEDGCODE = #{ledgcode,jdbcType=CHAR}
+  </update>
+</mapper>

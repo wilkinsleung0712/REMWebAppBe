@@ -1,0 +1,1294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.colliers.mri.mapper.PohdMapper">
+  <resultMap id="BaseResultMap" type="com.colliers.mri.pojo.Pohd">
+    <id column="PONUM" jdbcType="CHAR" property="ponum" />
+    <result column="POPREFX" jdbcType="CHAR" property="poprefx" />
+    <result column="VENDID" jdbcType="CHAR" property="vendid" />
+    <result column="VENDSUB" jdbcType="CHAR" property="vendsub" />
+    <result column="ENTERED" jdbcType="TIMESTAMP" property="entered" />
+    <result column="PODESC" jdbcType="CHAR" property="podesc" />
+    <result column="REQBY" jdbcType="CHAR" property="reqby" />
+    <result column="TERMS" jdbcType="CHAR" property="terms" />
+    <result column="DELVDATE" jdbcType="TIMESTAMP" property="delvdate" />
+    <result column="CONTACT" jdbcType="CHAR" property="contact" />
+    <result column="CONTPHON" jdbcType="CHAR" property="contphon" />
+    <result column="SHIPVIA" jdbcType="CHAR" property="shipvia" />
+    <result column="CANCLAFT" jdbcType="TIMESTAMP" property="canclaft" />
+    <result column="APPROVED" jdbcType="TIMESTAMP" property="approved" />
+    <result column="APPRVDBY" jdbcType="CHAR" property="apprvdby" />
+    <result column="APPROVE2" jdbcType="TIMESTAMP" property="approve2" />
+    <result column="APPRV2BY" jdbcType="CHAR" property="apprv2by" />
+    <result column="ORDSTAT" jdbcType="CHAR" property="ordstat" />
+    <result column="TAXABLE" jdbcType="CHAR" property="taxable" />
+    <result column="TAXEXEMP" jdbcType="CHAR" property="taxexemp" />
+    <result column="SHIPADR1" jdbcType="CHAR" property="shipadr1" />
+    <result column="SHIPADR2" jdbcType="CHAR" property="shipadr2" />
+    <result column="SHIPADR3" jdbcType="CHAR" property="shipadr3" />
+    <result column="SHIPCITY" jdbcType="CHAR" property="shipcity" />
+    <result column="SHIPST" jdbcType="CHAR" property="shipst" />
+    <result column="SHIPZIP" jdbcType="CHAR" property="shipzip" />
+    <result column="BILLADR1" jdbcType="CHAR" property="billadr1" />
+    <result column="BILLADR2" jdbcType="CHAR" property="billadr2" />
+    <result column="BILLADR3" jdbcType="CHAR" property="billadr3" />
+    <result column="BILLCITY" jdbcType="CHAR" property="billcity" />
+    <result column="BILLST" jdbcType="CHAR" property="billst" />
+    <result column="BILLZIP" jdbcType="CHAR" property="billzip" />
+    <result column="SITEID" jdbcType="CHAR" property="siteid" />
+    <result column="CURRCODE" jdbcType="CHAR" property="currcode" />
+    <result column="TOTAL" jdbcType="DECIMAL" property="total" />
+    <result column="TYPE" jdbcType="CHAR" property="type" />
+    <result column="PRNTDATE" jdbcType="TIMESTAMP" property="prntdate" />
+    <result column="LASTDATE" jdbcType="TIMESTAMP" property="lastdate" />
+    <result column="USERID" jdbcType="CHAR" property="userid" />
+    <result column="INVOICE" jdbcType="CHAR" property="invoice" />
+    <result column="REFPONUM" jdbcType="CHAR" property="refponum" />
+    <result column="INTERNAL" jdbcType="CHAR" property="internal" />
+    <result column="SHIPCOST" jdbcType="DECIMAL" property="shipcost" />
+    <result column="FREIGHT" jdbcType="CHAR" property="freight" />
+    <result column="BLKTPONUM" jdbcType="CHAR" property="blktponum" />
+    <result column="CROSSSITE" jdbcType="CHAR" property="crosssite" />
+    <result column="ALLOCODE" jdbcType="CHAR" property="allocode" />
+    <result column="OUTSIDEBUD" jdbcType="CHAR" property="outsidebud" />
+    <result column="ESTEXPPED" jdbcType="CHAR" property="estexpped" />
+    <result column="EXPCTRLFLAG" jdbcType="CHAR" property="expctrlflag" />
+    <result column="STDATE" jdbcType="TIMESTAMP" property="stdate" />
+    <result column="ENDDATE" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="RECHARGE" jdbcType="CHAR" property="recharge" />
+    <result column="VOIDBY" jdbcType="CHAR" property="voidby" />
+    <result column="VOIDDATE" jdbcType="TIMESTAMP" property="voiddate" />
+    <result column="ATTACHID" jdbcType="CHAR" property="attachid" />
+    <result column="BPAYBILLCODE" jdbcType="CHAR" property="bpaybillcode" />
+    <result column="BPAYCUSTREF" jdbcType="CHAR" property="bpaycustref" />
+    <result column="STAGE" jdbcType="CHAR" property="stage" />
+    <result column="CLARITYTRANSFER" jdbcType="CHAR" property="claritytransfer" />
+    <result column="CLATTACHID" jdbcType="CHAR" property="clattachid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.colliers.mri.pojo.PohdWithBLOBs">
+    <result column="ADDLDESC" jdbcType="LONGVARCHAR" property="addldesc" />
+    <result column="VOIDCOMM" jdbcType="LONGVARCHAR" property="voidcomm" />
+    <result column="COMMENTS" jdbcType="LONGVARCHAR" property="comments" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PONUM, POPREFX, VENDID, VENDSUB, ENTERED, PODESC, REQBY, TERMS, DELVDATE, CONTACT, 
+    CONTPHON, SHIPVIA, CANCLAFT, APPROVED, APPRVDBY, APPROVE2, APPRV2BY, ORDSTAT, TAXABLE, 
+    TAXEXEMP, SHIPADR1, SHIPADR2, SHIPADR3, SHIPCITY, SHIPST, SHIPZIP, BILLADR1, BILLADR2, 
+    BILLADR3, BILLCITY, BILLST, BILLZIP, SITEID, CURRCODE, TOTAL, TYPE, PRNTDATE, LASTDATE, 
+    USERID, INVOICE, REFPONUM, INTERNAL, SHIPCOST, FREIGHT, BLKTPONUM, CROSSSITE, ALLOCODE, 
+    OUTSIDEBUD, ESTEXPPED, EXPCTRLFLAG, STDATE, ENDDATE, RECHARGE, VOIDBY, VOIDDATE, 
+    ATTACHID, BPAYBILLCODE, BPAYCUSTREF, STAGE, CLARITYTRANSFER, CLATTACHID
+  </sql>
+  <sql id="Blob_Column_List">
+    ADDLDESC, VOIDCOMM, COMMENTS
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.colliers.mri.pojo.PohdExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from POHD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.colliers.mri.pojo.PohdExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from POHD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from POHD
+    where PONUM = #{ponum,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from POHD
+    where PONUM = #{ponum,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.colliers.mri.pojo.PohdExample">
+    delete from POHD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.colliers.mri.pojo.PohdWithBLOBs">
+    insert into POHD (PONUM, POPREFX, VENDID, 
+      VENDSUB, ENTERED, PODESC, 
+      REQBY, TERMS, DELVDATE, 
+      CONTACT, CONTPHON, SHIPVIA, 
+      CANCLAFT, APPROVED, APPRVDBY, 
+      APPROVE2, APPRV2BY, ORDSTAT, 
+      TAXABLE, TAXEXEMP, SHIPADR1, 
+      SHIPADR2, SHIPADR3, SHIPCITY, 
+      SHIPST, SHIPZIP, BILLADR1, BILLADR2, 
+      BILLADR3, BILLCITY, BILLST, 
+      BILLZIP, SITEID, CURRCODE, TOTAL, 
+      TYPE, PRNTDATE, LASTDATE, 
+      USERID, INVOICE, REFPONUM, INTERNAL, 
+      SHIPCOST, FREIGHT, BLKTPONUM, 
+      CROSSSITE, ALLOCODE, OUTSIDEBUD, 
+      ESTEXPPED, EXPCTRLFLAG, STDATE, 
+      ENDDATE, RECHARGE, VOIDBY, 
+      VOIDDATE, ATTACHID, BPAYBILLCODE, 
+      BPAYCUSTREF, STAGE, CLARITYTRANSFER, 
+      CLATTACHID, ADDLDESC, VOIDCOMM, 
+      COMMENTS)
+    values (#{ponum,jdbcType=CHAR}, #{poprefx,jdbcType=CHAR}, #{vendid,jdbcType=CHAR}, 
+      #{vendsub,jdbcType=CHAR}, #{entered,jdbcType=TIMESTAMP}, #{podesc,jdbcType=CHAR}, 
+      #{reqby,jdbcType=CHAR}, #{terms,jdbcType=CHAR}, #{delvdate,jdbcType=TIMESTAMP}, 
+      #{contact,jdbcType=CHAR}, #{contphon,jdbcType=CHAR}, #{shipvia,jdbcType=CHAR}, 
+      #{canclaft,jdbcType=TIMESTAMP}, #{approved,jdbcType=TIMESTAMP}, #{apprvdby,jdbcType=CHAR}, 
+      #{approve2,jdbcType=TIMESTAMP}, #{apprv2by,jdbcType=CHAR}, #{ordstat,jdbcType=CHAR}, 
+      #{taxable,jdbcType=CHAR}, #{taxexemp,jdbcType=CHAR}, #{shipadr1,jdbcType=CHAR}, 
+      #{shipadr2,jdbcType=CHAR}, #{shipadr3,jdbcType=CHAR}, #{shipcity,jdbcType=CHAR}, 
+      #{shipst,jdbcType=CHAR}, #{shipzip,jdbcType=CHAR}, #{billadr1,jdbcType=CHAR}, #{billadr2,jdbcType=CHAR}, 
+      #{billadr3,jdbcType=CHAR}, #{billcity,jdbcType=CHAR}, #{billst,jdbcType=CHAR}, 
+      #{billzip,jdbcType=CHAR}, #{siteid,jdbcType=CHAR}, #{currcode,jdbcType=CHAR}, #{total,jdbcType=DECIMAL}, 
+      #{type,jdbcType=CHAR}, #{prntdate,jdbcType=TIMESTAMP}, #{lastdate,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=CHAR}, #{invoice,jdbcType=CHAR}, #{refponum,jdbcType=CHAR}, #{internal,jdbcType=CHAR}, 
+      #{shipcost,jdbcType=DECIMAL}, #{freight,jdbcType=CHAR}, #{blktponum,jdbcType=CHAR}, 
+      #{crosssite,jdbcType=CHAR}, #{allocode,jdbcType=CHAR}, #{outsidebud,jdbcType=CHAR}, 
+      #{estexpped,jdbcType=CHAR}, #{expctrlflag,jdbcType=CHAR}, #{stdate,jdbcType=TIMESTAMP}, 
+      #{enddate,jdbcType=TIMESTAMP}, #{recharge,jdbcType=CHAR}, #{voidby,jdbcType=CHAR}, 
+      #{voiddate,jdbcType=TIMESTAMP}, #{attachid,jdbcType=CHAR}, #{bpaybillcode,jdbcType=CHAR}, 
+      #{bpaycustref,jdbcType=CHAR}, #{stage,jdbcType=CHAR}, #{claritytransfer,jdbcType=CHAR}, 
+      #{clattachid,jdbcType=CHAR}, #{addldesc,jdbcType=LONGVARCHAR}, #{voidcomm,jdbcType=LONGVARCHAR}, 
+      #{comments,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.colliers.mri.pojo.PohdWithBLOBs">
+    insert into POHD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ponum != null">
+        PONUM,
+      </if>
+      <if test="poprefx != null">
+        POPREFX,
+      </if>
+      <if test="vendid != null">
+        VENDID,
+      </if>
+      <if test="vendsub != null">
+        VENDSUB,
+      </if>
+      <if test="entered != null">
+        ENTERED,
+      </if>
+      <if test="podesc != null">
+        PODESC,
+      </if>
+      <if test="reqby != null">
+        REQBY,
+      </if>
+      <if test="terms != null">
+        TERMS,
+      </if>
+      <if test="delvdate != null">
+        DELVDATE,
+      </if>
+      <if test="contact != null">
+        CONTACT,
+      </if>
+      <if test="contphon != null">
+        CONTPHON,
+      </if>
+      <if test="shipvia != null">
+        SHIPVIA,
+      </if>
+      <if test="canclaft != null">
+        CANCLAFT,
+      </if>
+      <if test="approved != null">
+        APPROVED,
+      </if>
+      <if test="apprvdby != null">
+        APPRVDBY,
+      </if>
+      <if test="approve2 != null">
+        APPROVE2,
+      </if>
+      <if test="apprv2by != null">
+        APPRV2BY,
+      </if>
+      <if test="ordstat != null">
+        ORDSTAT,
+      </if>
+      <if test="taxable != null">
+        TAXABLE,
+      </if>
+      <if test="taxexemp != null">
+        TAXEXEMP,
+      </if>
+      <if test="shipadr1 != null">
+        SHIPADR1,
+      </if>
+      <if test="shipadr2 != null">
+        SHIPADR2,
+      </if>
+      <if test="shipadr3 != null">
+        SHIPADR3,
+      </if>
+      <if test="shipcity != null">
+        SHIPCITY,
+      </if>
+      <if test="shipst != null">
+        SHIPST,
+      </if>
+      <if test="shipzip != null">
+        SHIPZIP,
+      </if>
+      <if test="billadr1 != null">
+        BILLADR1,
+      </if>
+      <if test="billadr2 != null">
+        BILLADR2,
+      </if>
+      <if test="billadr3 != null">
+        BILLADR3,
+      </if>
+      <if test="billcity != null">
+        BILLCITY,
+      </if>
+      <if test="billst != null">
+        BILLST,
+      </if>
+      <if test="billzip != null">
+        BILLZIP,
+      </if>
+      <if test="siteid != null">
+        SITEID,
+      </if>
+      <if test="currcode != null">
+        CURRCODE,
+      </if>
+      <if test="total != null">
+        TOTAL,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="prntdate != null">
+        PRNTDATE,
+      </if>
+      <if test="lastdate != null">
+        LASTDATE,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="invoice != null">
+        INVOICE,
+      </if>
+      <if test="refponum != null">
+        REFPONUM,
+      </if>
+      <if test="internal != null">
+        INTERNAL,
+      </if>
+      <if test="shipcost != null">
+        SHIPCOST,
+      </if>
+      <if test="freight != null">
+        FREIGHT,
+      </if>
+      <if test="blktponum != null">
+        BLKTPONUM,
+      </if>
+      <if test="crosssite != null">
+        CROSSSITE,
+      </if>
+      <if test="allocode != null">
+        ALLOCODE,
+      </if>
+      <if test="outsidebud != null">
+        OUTSIDEBUD,
+      </if>
+      <if test="estexpped != null">
+        ESTEXPPED,
+      </if>
+      <if test="expctrlflag != null">
+        EXPCTRLFLAG,
+      </if>
+      <if test="stdate != null">
+        STDATE,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="recharge != null">
+        RECHARGE,
+      </if>
+      <if test="voidby != null">
+        VOIDBY,
+      </if>
+      <if test="voiddate != null">
+        VOIDDATE,
+      </if>
+      <if test="attachid != null">
+        ATTACHID,
+      </if>
+      <if test="bpaybillcode != null">
+        BPAYBILLCODE,
+      </if>
+      <if test="bpaycustref != null">
+        BPAYCUSTREF,
+      </if>
+      <if test="stage != null">
+        STAGE,
+      </if>
+      <if test="claritytransfer != null">
+        CLARITYTRANSFER,
+      </if>
+      <if test="clattachid != null">
+        CLATTACHID,
+      </if>
+      <if test="addldesc != null">
+        ADDLDESC,
+      </if>
+      <if test="voidcomm != null">
+        VOIDCOMM,
+      </if>
+      <if test="comments != null">
+        COMMENTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ponum != null">
+        #{ponum,jdbcType=CHAR},
+      </if>
+      <if test="poprefx != null">
+        #{poprefx,jdbcType=CHAR},
+      </if>
+      <if test="vendid != null">
+        #{vendid,jdbcType=CHAR},
+      </if>
+      <if test="vendsub != null">
+        #{vendsub,jdbcType=CHAR},
+      </if>
+      <if test="entered != null">
+        #{entered,jdbcType=TIMESTAMP},
+      </if>
+      <if test="podesc != null">
+        #{podesc,jdbcType=CHAR},
+      </if>
+      <if test="reqby != null">
+        #{reqby,jdbcType=CHAR},
+      </if>
+      <if test="terms != null">
+        #{terms,jdbcType=CHAR},
+      </if>
+      <if test="delvdate != null">
+        #{delvdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=CHAR},
+      </if>
+      <if test="contphon != null">
+        #{contphon,jdbcType=CHAR},
+      </if>
+      <if test="shipvia != null">
+        #{shipvia,jdbcType=CHAR},
+      </if>
+      <if test="canclaft != null">
+        #{canclaft,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approved != null">
+        #{approved,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apprvdby != null">
+        #{apprvdby,jdbcType=CHAR},
+      </if>
+      <if test="approve2 != null">
+        #{approve2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apprv2by != null">
+        #{apprv2by,jdbcType=CHAR},
+      </if>
+      <if test="ordstat != null">
+        #{ordstat,jdbcType=CHAR},
+      </if>
+      <if test="taxable != null">
+        #{taxable,jdbcType=CHAR},
+      </if>
+      <if test="taxexemp != null">
+        #{taxexemp,jdbcType=CHAR},
+      </if>
+      <if test="shipadr1 != null">
+        #{shipadr1,jdbcType=CHAR},
+      </if>
+      <if test="shipadr2 != null">
+        #{shipadr2,jdbcType=CHAR},
+      </if>
+      <if test="shipadr3 != null">
+        #{shipadr3,jdbcType=CHAR},
+      </if>
+      <if test="shipcity != null">
+        #{shipcity,jdbcType=CHAR},
+      </if>
+      <if test="shipst != null">
+        #{shipst,jdbcType=CHAR},
+      </if>
+      <if test="shipzip != null">
+        #{shipzip,jdbcType=CHAR},
+      </if>
+      <if test="billadr1 != null">
+        #{billadr1,jdbcType=CHAR},
+      </if>
+      <if test="billadr2 != null">
+        #{billadr2,jdbcType=CHAR},
+      </if>
+      <if test="billadr3 != null">
+        #{billadr3,jdbcType=CHAR},
+      </if>
+      <if test="billcity != null">
+        #{billcity,jdbcType=CHAR},
+      </if>
+      <if test="billst != null">
+        #{billst,jdbcType=CHAR},
+      </if>
+      <if test="billzip != null">
+        #{billzip,jdbcType=CHAR},
+      </if>
+      <if test="siteid != null">
+        #{siteid,jdbcType=CHAR},
+      </if>
+      <if test="currcode != null">
+        #{currcode,jdbcType=CHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="prntdate != null">
+        #{prntdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastdate != null">
+        #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="invoice != null">
+        #{invoice,jdbcType=CHAR},
+      </if>
+      <if test="refponum != null">
+        #{refponum,jdbcType=CHAR},
+      </if>
+      <if test="internal != null">
+        #{internal,jdbcType=CHAR},
+      </if>
+      <if test="shipcost != null">
+        #{shipcost,jdbcType=DECIMAL},
+      </if>
+      <if test="freight != null">
+        #{freight,jdbcType=CHAR},
+      </if>
+      <if test="blktponum != null">
+        #{blktponum,jdbcType=CHAR},
+      </if>
+      <if test="crosssite != null">
+        #{crosssite,jdbcType=CHAR},
+      </if>
+      <if test="allocode != null">
+        #{allocode,jdbcType=CHAR},
+      </if>
+      <if test="outsidebud != null">
+        #{outsidebud,jdbcType=CHAR},
+      </if>
+      <if test="estexpped != null">
+        #{estexpped,jdbcType=CHAR},
+      </if>
+      <if test="expctrlflag != null">
+        #{expctrlflag,jdbcType=CHAR},
+      </if>
+      <if test="stdate != null">
+        #{stdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recharge != null">
+        #{recharge,jdbcType=CHAR},
+      </if>
+      <if test="voidby != null">
+        #{voidby,jdbcType=CHAR},
+      </if>
+      <if test="voiddate != null">
+        #{voiddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attachid != null">
+        #{attachid,jdbcType=CHAR},
+      </if>
+      <if test="bpaybillcode != null">
+        #{bpaybillcode,jdbcType=CHAR},
+      </if>
+      <if test="bpaycustref != null">
+        #{bpaycustref,jdbcType=CHAR},
+      </if>
+      <if test="stage != null">
+        #{stage,jdbcType=CHAR},
+      </if>
+      <if test="claritytransfer != null">
+        #{claritytransfer,jdbcType=CHAR},
+      </if>
+      <if test="clattachid != null">
+        #{clattachid,jdbcType=CHAR},
+      </if>
+      <if test="addldesc != null">
+        #{addldesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="voidcomm != null">
+        #{voidcomm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.colliers.mri.pojo.PohdExample" resultType="java.lang.Long">
+    select count(*) from POHD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update POHD
+    <set>
+      <if test="record.ponum != null">
+        PONUM = #{record.ponum,jdbcType=CHAR},
+      </if>
+      <if test="record.poprefx != null">
+        POPREFX = #{record.poprefx,jdbcType=CHAR},
+      </if>
+      <if test="record.vendid != null">
+        VENDID = #{record.vendid,jdbcType=CHAR},
+      </if>
+      <if test="record.vendsub != null">
+        VENDSUB = #{record.vendsub,jdbcType=CHAR},
+      </if>
+      <if test="record.entered != null">
+        ENTERED = #{record.entered,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.podesc != null">
+        PODESC = #{record.podesc,jdbcType=CHAR},
+      </if>
+      <if test="record.reqby != null">
+        REQBY = #{record.reqby,jdbcType=CHAR},
+      </if>
+      <if test="record.terms != null">
+        TERMS = #{record.terms,jdbcType=CHAR},
+      </if>
+      <if test="record.delvdate != null">
+        DELVDATE = #{record.delvdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.contact != null">
+        CONTACT = #{record.contact,jdbcType=CHAR},
+      </if>
+      <if test="record.contphon != null">
+        CONTPHON = #{record.contphon,jdbcType=CHAR},
+      </if>
+      <if test="record.shipvia != null">
+        SHIPVIA = #{record.shipvia,jdbcType=CHAR},
+      </if>
+      <if test="record.canclaft != null">
+        CANCLAFT = #{record.canclaft,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approved != null">
+        APPROVED = #{record.approved,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.apprvdby != null">
+        APPRVDBY = #{record.apprvdby,jdbcType=CHAR},
+      </if>
+      <if test="record.approve2 != null">
+        APPROVE2 = #{record.approve2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.apprv2by != null">
+        APPRV2BY = #{record.apprv2by,jdbcType=CHAR},
+      </if>
+      <if test="record.ordstat != null">
+        ORDSTAT = #{record.ordstat,jdbcType=CHAR},
+      </if>
+      <if test="record.taxable != null">
+        TAXABLE = #{record.taxable,jdbcType=CHAR},
+      </if>
+      <if test="record.taxexemp != null">
+        TAXEXEMP = #{record.taxexemp,jdbcType=CHAR},
+      </if>
+      <if test="record.shipadr1 != null">
+        SHIPADR1 = #{record.shipadr1,jdbcType=CHAR},
+      </if>
+      <if test="record.shipadr2 != null">
+        SHIPADR2 = #{record.shipadr2,jdbcType=CHAR},
+      </if>
+      <if test="record.shipadr3 != null">
+        SHIPADR3 = #{record.shipadr3,jdbcType=CHAR},
+      </if>
+      <if test="record.shipcity != null">
+        SHIPCITY = #{record.shipcity,jdbcType=CHAR},
+      </if>
+      <if test="record.shipst != null">
+        SHIPST = #{record.shipst,jdbcType=CHAR},
+      </if>
+      <if test="record.shipzip != null">
+        SHIPZIP = #{record.shipzip,jdbcType=CHAR},
+      </if>
+      <if test="record.billadr1 != null">
+        BILLADR1 = #{record.billadr1,jdbcType=CHAR},
+      </if>
+      <if test="record.billadr2 != null">
+        BILLADR2 = #{record.billadr2,jdbcType=CHAR},
+      </if>
+      <if test="record.billadr3 != null">
+        BILLADR3 = #{record.billadr3,jdbcType=CHAR},
+      </if>
+      <if test="record.billcity != null">
+        BILLCITY = #{record.billcity,jdbcType=CHAR},
+      </if>
+      <if test="record.billst != null">
+        BILLST = #{record.billst,jdbcType=CHAR},
+      </if>
+      <if test="record.billzip != null">
+        BILLZIP = #{record.billzip,jdbcType=CHAR},
+      </if>
+      <if test="record.siteid != null">
+        SITEID = #{record.siteid,jdbcType=CHAR},
+      </if>
+      <if test="record.currcode != null">
+        CURRCODE = #{record.currcode,jdbcType=CHAR},
+      </if>
+      <if test="record.total != null">
+        TOTAL = #{record.total,jdbcType=DECIMAL},
+      </if>
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.prntdate != null">
+        PRNTDATE = #{record.prntdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastdate != null">
+        LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=CHAR},
+      </if>
+      <if test="record.invoice != null">
+        INVOICE = #{record.invoice,jdbcType=CHAR},
+      </if>
+      <if test="record.refponum != null">
+        REFPONUM = #{record.refponum,jdbcType=CHAR},
+      </if>
+      <if test="record.internal != null">
+        INTERNAL = #{record.internal,jdbcType=CHAR},
+      </if>
+      <if test="record.shipcost != null">
+        SHIPCOST = #{record.shipcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freight != null">
+        FREIGHT = #{record.freight,jdbcType=CHAR},
+      </if>
+      <if test="record.blktponum != null">
+        BLKTPONUM = #{record.blktponum,jdbcType=CHAR},
+      </if>
+      <if test="record.crosssite != null">
+        CROSSSITE = #{record.crosssite,jdbcType=CHAR},
+      </if>
+      <if test="record.allocode != null">
+        ALLOCODE = #{record.allocode,jdbcType=CHAR},
+      </if>
+      <if test="record.outsidebud != null">
+        OUTSIDEBUD = #{record.outsidebud,jdbcType=CHAR},
+      </if>
+      <if test="record.estexpped != null">
+        ESTEXPPED = #{record.estexpped,jdbcType=CHAR},
+      </if>
+      <if test="record.expctrlflag != null">
+        EXPCTRLFLAG = #{record.expctrlflag,jdbcType=CHAR},
+      </if>
+      <if test="record.stdate != null">
+        STDATE = #{record.stdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enddate != null">
+        ENDDATE = #{record.enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.recharge != null">
+        RECHARGE = #{record.recharge,jdbcType=CHAR},
+      </if>
+      <if test="record.voidby != null">
+        VOIDBY = #{record.voidby,jdbcType=CHAR},
+      </if>
+      <if test="record.voiddate != null">
+        VOIDDATE = #{record.voiddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.attachid != null">
+        ATTACHID = #{record.attachid,jdbcType=CHAR},
+      </if>
+      <if test="record.bpaybillcode != null">
+        BPAYBILLCODE = #{record.bpaybillcode,jdbcType=CHAR},
+      </if>
+      <if test="record.bpaycustref != null">
+        BPAYCUSTREF = #{record.bpaycustref,jdbcType=CHAR},
+      </if>
+      <if test="record.stage != null">
+        STAGE = #{record.stage,jdbcType=CHAR},
+      </if>
+      <if test="record.claritytransfer != null">
+        CLARITYTRANSFER = #{record.claritytransfer,jdbcType=CHAR},
+      </if>
+      <if test="record.clattachid != null">
+        CLATTACHID = #{record.clattachid,jdbcType=CHAR},
+      </if>
+      <if test="record.addldesc != null">
+        ADDLDESC = #{record.addldesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.voidcomm != null">
+        VOIDCOMM = #{record.voidcomm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.comments != null">
+        COMMENTS = #{record.comments,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update POHD
+    set PONUM = #{record.ponum,jdbcType=CHAR},
+      POPREFX = #{record.poprefx,jdbcType=CHAR},
+      VENDID = #{record.vendid,jdbcType=CHAR},
+      VENDSUB = #{record.vendsub,jdbcType=CHAR},
+      ENTERED = #{record.entered,jdbcType=TIMESTAMP},
+      PODESC = #{record.podesc,jdbcType=CHAR},
+      REQBY = #{record.reqby,jdbcType=CHAR},
+      TERMS = #{record.terms,jdbcType=CHAR},
+      DELVDATE = #{record.delvdate,jdbcType=TIMESTAMP},
+      CONTACT = #{record.contact,jdbcType=CHAR},
+      CONTPHON = #{record.contphon,jdbcType=CHAR},
+      SHIPVIA = #{record.shipvia,jdbcType=CHAR},
+      CANCLAFT = #{record.canclaft,jdbcType=TIMESTAMP},
+      APPROVED = #{record.approved,jdbcType=TIMESTAMP},
+      APPRVDBY = #{record.apprvdby,jdbcType=CHAR},
+      APPROVE2 = #{record.approve2,jdbcType=TIMESTAMP},
+      APPRV2BY = #{record.apprv2by,jdbcType=CHAR},
+      ORDSTAT = #{record.ordstat,jdbcType=CHAR},
+      TAXABLE = #{record.taxable,jdbcType=CHAR},
+      TAXEXEMP = #{record.taxexemp,jdbcType=CHAR},
+      SHIPADR1 = #{record.shipadr1,jdbcType=CHAR},
+      SHIPADR2 = #{record.shipadr2,jdbcType=CHAR},
+      SHIPADR3 = #{record.shipadr3,jdbcType=CHAR},
+      SHIPCITY = #{record.shipcity,jdbcType=CHAR},
+      SHIPST = #{record.shipst,jdbcType=CHAR},
+      SHIPZIP = #{record.shipzip,jdbcType=CHAR},
+      BILLADR1 = #{record.billadr1,jdbcType=CHAR},
+      BILLADR2 = #{record.billadr2,jdbcType=CHAR},
+      BILLADR3 = #{record.billadr3,jdbcType=CHAR},
+      BILLCITY = #{record.billcity,jdbcType=CHAR},
+      BILLST = #{record.billst,jdbcType=CHAR},
+      BILLZIP = #{record.billzip,jdbcType=CHAR},
+      SITEID = #{record.siteid,jdbcType=CHAR},
+      CURRCODE = #{record.currcode,jdbcType=CHAR},
+      TOTAL = #{record.total,jdbcType=DECIMAL},
+      TYPE = #{record.type,jdbcType=CHAR},
+      PRNTDATE = #{record.prntdate,jdbcType=TIMESTAMP},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      USERID = #{record.userid,jdbcType=CHAR},
+      INVOICE = #{record.invoice,jdbcType=CHAR},
+      REFPONUM = #{record.refponum,jdbcType=CHAR},
+      INTERNAL = #{record.internal,jdbcType=CHAR},
+      SHIPCOST = #{record.shipcost,jdbcType=DECIMAL},
+      FREIGHT = #{record.freight,jdbcType=CHAR},
+      BLKTPONUM = #{record.blktponum,jdbcType=CHAR},
+      CROSSSITE = #{record.crosssite,jdbcType=CHAR},
+      ALLOCODE = #{record.allocode,jdbcType=CHAR},
+      OUTSIDEBUD = #{record.outsidebud,jdbcType=CHAR},
+      ESTEXPPED = #{record.estexpped,jdbcType=CHAR},
+      EXPCTRLFLAG = #{record.expctrlflag,jdbcType=CHAR},
+      STDATE = #{record.stdate,jdbcType=TIMESTAMP},
+      ENDDATE = #{record.enddate,jdbcType=TIMESTAMP},
+      RECHARGE = #{record.recharge,jdbcType=CHAR},
+      VOIDBY = #{record.voidby,jdbcType=CHAR},
+      VOIDDATE = #{record.voiddate,jdbcType=TIMESTAMP},
+      ATTACHID = #{record.attachid,jdbcType=CHAR},
+      BPAYBILLCODE = #{record.bpaybillcode,jdbcType=CHAR},
+      BPAYCUSTREF = #{record.bpaycustref,jdbcType=CHAR},
+      STAGE = #{record.stage,jdbcType=CHAR},
+      CLARITYTRANSFER = #{record.claritytransfer,jdbcType=CHAR},
+      CLATTACHID = #{record.clattachid,jdbcType=CHAR},
+      ADDLDESC = #{record.addldesc,jdbcType=LONGVARCHAR},
+      VOIDCOMM = #{record.voidcomm,jdbcType=LONGVARCHAR},
+      COMMENTS = #{record.comments,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update POHD
+    set PONUM = #{record.ponum,jdbcType=CHAR},
+      POPREFX = #{record.poprefx,jdbcType=CHAR},
+      VENDID = #{record.vendid,jdbcType=CHAR},
+      VENDSUB = #{record.vendsub,jdbcType=CHAR},
+      ENTERED = #{record.entered,jdbcType=TIMESTAMP},
+      PODESC = #{record.podesc,jdbcType=CHAR},
+      REQBY = #{record.reqby,jdbcType=CHAR},
+      TERMS = #{record.terms,jdbcType=CHAR},
+      DELVDATE = #{record.delvdate,jdbcType=TIMESTAMP},
+      CONTACT = #{record.contact,jdbcType=CHAR},
+      CONTPHON = #{record.contphon,jdbcType=CHAR},
+      SHIPVIA = #{record.shipvia,jdbcType=CHAR},
+      CANCLAFT = #{record.canclaft,jdbcType=TIMESTAMP},
+      APPROVED = #{record.approved,jdbcType=TIMESTAMP},
+      APPRVDBY = #{record.apprvdby,jdbcType=CHAR},
+      APPROVE2 = #{record.approve2,jdbcType=TIMESTAMP},
+      APPRV2BY = #{record.apprv2by,jdbcType=CHAR},
+      ORDSTAT = #{record.ordstat,jdbcType=CHAR},
+      TAXABLE = #{record.taxable,jdbcType=CHAR},
+      TAXEXEMP = #{record.taxexemp,jdbcType=CHAR},
+      SHIPADR1 = #{record.shipadr1,jdbcType=CHAR},
+      SHIPADR2 = #{record.shipadr2,jdbcType=CHAR},
+      SHIPADR3 = #{record.shipadr3,jdbcType=CHAR},
+      SHIPCITY = #{record.shipcity,jdbcType=CHAR},
+      SHIPST = #{record.shipst,jdbcType=CHAR},
+      SHIPZIP = #{record.shipzip,jdbcType=CHAR},
+      BILLADR1 = #{record.billadr1,jdbcType=CHAR},
+      BILLADR2 = #{record.billadr2,jdbcType=CHAR},
+      BILLADR3 = #{record.billadr3,jdbcType=CHAR},
+      BILLCITY = #{record.billcity,jdbcType=CHAR},
+      BILLST = #{record.billst,jdbcType=CHAR},
+      BILLZIP = #{record.billzip,jdbcType=CHAR},
+      SITEID = #{record.siteid,jdbcType=CHAR},
+      CURRCODE = #{record.currcode,jdbcType=CHAR},
+      TOTAL = #{record.total,jdbcType=DECIMAL},
+      TYPE = #{record.type,jdbcType=CHAR},
+      PRNTDATE = #{record.prntdate,jdbcType=TIMESTAMP},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      USERID = #{record.userid,jdbcType=CHAR},
+      INVOICE = #{record.invoice,jdbcType=CHAR},
+      REFPONUM = #{record.refponum,jdbcType=CHAR},
+      INTERNAL = #{record.internal,jdbcType=CHAR},
+      SHIPCOST = #{record.shipcost,jdbcType=DECIMAL},
+      FREIGHT = #{record.freight,jdbcType=CHAR},
+      BLKTPONUM = #{record.blktponum,jdbcType=CHAR},
+      CROSSSITE = #{record.crosssite,jdbcType=CHAR},
+      ALLOCODE = #{record.allocode,jdbcType=CHAR},
+      OUTSIDEBUD = #{record.outsidebud,jdbcType=CHAR},
+      ESTEXPPED = #{record.estexpped,jdbcType=CHAR},
+      EXPCTRLFLAG = #{record.expctrlflag,jdbcType=CHAR},
+      STDATE = #{record.stdate,jdbcType=TIMESTAMP},
+      ENDDATE = #{record.enddate,jdbcType=TIMESTAMP},
+      RECHARGE = #{record.recharge,jdbcType=CHAR},
+      VOIDBY = #{record.voidby,jdbcType=CHAR},
+      VOIDDATE = #{record.voiddate,jdbcType=TIMESTAMP},
+      ATTACHID = #{record.attachid,jdbcType=CHAR},
+      BPAYBILLCODE = #{record.bpaybillcode,jdbcType=CHAR},
+      BPAYCUSTREF = #{record.bpaycustref,jdbcType=CHAR},
+      STAGE = #{record.stage,jdbcType=CHAR},
+      CLARITYTRANSFER = #{record.claritytransfer,jdbcType=CHAR},
+      CLATTACHID = #{record.clattachid,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.colliers.mri.pojo.PohdWithBLOBs">
+    update POHD
+    <set>
+      <if test="poprefx != null">
+        POPREFX = #{poprefx,jdbcType=CHAR},
+      </if>
+      <if test="vendid != null">
+        VENDID = #{vendid,jdbcType=CHAR},
+      </if>
+      <if test="vendsub != null">
+        VENDSUB = #{vendsub,jdbcType=CHAR},
+      </if>
+      <if test="entered != null">
+        ENTERED = #{entered,jdbcType=TIMESTAMP},
+      </if>
+      <if test="podesc != null">
+        PODESC = #{podesc,jdbcType=CHAR},
+      </if>
+      <if test="reqby != null">
+        REQBY = #{reqby,jdbcType=CHAR},
+      </if>
+      <if test="terms != null">
+        TERMS = #{terms,jdbcType=CHAR},
+      </if>
+      <if test="delvdate != null">
+        DELVDATE = #{delvdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contact != null">
+        CONTACT = #{contact,jdbcType=CHAR},
+      </if>
+      <if test="contphon != null">
+        CONTPHON = #{contphon,jdbcType=CHAR},
+      </if>
+      <if test="shipvia != null">
+        SHIPVIA = #{shipvia,jdbcType=CHAR},
+      </if>
+      <if test="canclaft != null">
+        CANCLAFT = #{canclaft,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approved != null">
+        APPROVED = #{approved,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apprvdby != null">
+        APPRVDBY = #{apprvdby,jdbcType=CHAR},
+      </if>
+      <if test="approve2 != null">
+        APPROVE2 = #{approve2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apprv2by != null">
+        APPRV2BY = #{apprv2by,jdbcType=CHAR},
+      </if>
+      <if test="ordstat != null">
+        ORDSTAT = #{ordstat,jdbcType=CHAR},
+      </if>
+      <if test="taxable != null">
+        TAXABLE = #{taxable,jdbcType=CHAR},
+      </if>
+      <if test="taxexemp != null">
+        TAXEXEMP = #{taxexemp,jdbcType=CHAR},
+      </if>
+      <if test="shipadr1 != null">
+        SHIPADR1 = #{shipadr1,jdbcType=CHAR},
+      </if>
+      <if test="shipadr2 != null">
+        SHIPADR2 = #{shipadr2,jdbcType=CHAR},
+      </if>
+      <if test="shipadr3 != null">
+        SHIPADR3 = #{shipadr3,jdbcType=CHAR},
+      </if>
+      <if test="shipcity != null">
+        SHIPCITY = #{shipcity,jdbcType=CHAR},
+      </if>
+      <if test="shipst != null">
+        SHIPST = #{shipst,jdbcType=CHAR},
+      </if>
+      <if test="shipzip != null">
+        SHIPZIP = #{shipzip,jdbcType=CHAR},
+      </if>
+      <if test="billadr1 != null">
+        BILLADR1 = #{billadr1,jdbcType=CHAR},
+      </if>
+      <if test="billadr2 != null">
+        BILLADR2 = #{billadr2,jdbcType=CHAR},
+      </if>
+      <if test="billadr3 != null">
+        BILLADR3 = #{billadr3,jdbcType=CHAR},
+      </if>
+      <if test="billcity != null">
+        BILLCITY = #{billcity,jdbcType=CHAR},
+      </if>
+      <if test="billst != null">
+        BILLST = #{billst,jdbcType=CHAR},
+      </if>
+      <if test="billzip != null">
+        BILLZIP = #{billzip,jdbcType=CHAR},
+      </if>
+      <if test="siteid != null">
+        SITEID = #{siteid,jdbcType=CHAR},
+      </if>
+      <if test="currcode != null">
+        CURRCODE = #{currcode,jdbcType=CHAR},
+      </if>
+      <if test="total != null">
+        TOTAL = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=CHAR},
+      </if>
+      <if test="prntdate != null">
+        PRNTDATE = #{prntdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastdate != null">
+        LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="invoice != null">
+        INVOICE = #{invoice,jdbcType=CHAR},
+      </if>
+      <if test="refponum != null">
+        REFPONUM = #{refponum,jdbcType=CHAR},
+      </if>
+      <if test="internal != null">
+        INTERNAL = #{internal,jdbcType=CHAR},
+      </if>
+      <if test="shipcost != null">
+        SHIPCOST = #{shipcost,jdbcType=DECIMAL},
+      </if>
+      <if test="freight != null">
+        FREIGHT = #{freight,jdbcType=CHAR},
+      </if>
+      <if test="blktponum != null">
+        BLKTPONUM = #{blktponum,jdbcType=CHAR},
+      </if>
+      <if test="crosssite != null">
+        CROSSSITE = #{crosssite,jdbcType=CHAR},
+      </if>
+      <if test="allocode != null">
+        ALLOCODE = #{allocode,jdbcType=CHAR},
+      </if>
+      <if test="outsidebud != null">
+        OUTSIDEBUD = #{outsidebud,jdbcType=CHAR},
+      </if>
+      <if test="estexpped != null">
+        ESTEXPPED = #{estexpped,jdbcType=CHAR},
+      </if>
+      <if test="expctrlflag != null">
+        EXPCTRLFLAG = #{expctrlflag,jdbcType=CHAR},
+      </if>
+      <if test="stdate != null">
+        STDATE = #{stdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recharge != null">
+        RECHARGE = #{recharge,jdbcType=CHAR},
+      </if>
+      <if test="voidby != null">
+        VOIDBY = #{voidby,jdbcType=CHAR},
+      </if>
+      <if test="voiddate != null">
+        VOIDDATE = #{voiddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attachid != null">
+        ATTACHID = #{attachid,jdbcType=CHAR},
+      </if>
+      <if test="bpaybillcode != null">
+        BPAYBILLCODE = #{bpaybillcode,jdbcType=CHAR},
+      </if>
+      <if test="bpaycustref != null">
+        BPAYCUSTREF = #{bpaycustref,jdbcType=CHAR},
+      </if>
+      <if test="stage != null">
+        STAGE = #{stage,jdbcType=CHAR},
+      </if>
+      <if test="claritytransfer != null">
+        CLARITYTRANSFER = #{claritytransfer,jdbcType=CHAR},
+      </if>
+      <if test="clattachid != null">
+        CLATTACHID = #{clattachid,jdbcType=CHAR},
+      </if>
+      <if test="addldesc != null">
+        ADDLDESC = #{addldesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="voidcomm != null">
+        VOIDCOMM = #{voidcomm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="comments != null">
+        COMMENTS = #{comments,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PONUM = #{ponum,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.colliers.mri.pojo.PohdWithBLOBs">
+    update POHD
+    set POPREFX = #{poprefx,jdbcType=CHAR},
+      VENDID = #{vendid,jdbcType=CHAR},
+      VENDSUB = #{vendsub,jdbcType=CHAR},
+      ENTERED = #{entered,jdbcType=TIMESTAMP},
+      PODESC = #{podesc,jdbcType=CHAR},
+      REQBY = #{reqby,jdbcType=CHAR},
+      TERMS = #{terms,jdbcType=CHAR},
+      DELVDATE = #{delvdate,jdbcType=TIMESTAMP},
+      CONTACT = #{contact,jdbcType=CHAR},
+      CONTPHON = #{contphon,jdbcType=CHAR},
+      SHIPVIA = #{shipvia,jdbcType=CHAR},
+      CANCLAFT = #{canclaft,jdbcType=TIMESTAMP},
+      APPROVED = #{approved,jdbcType=TIMESTAMP},
+      APPRVDBY = #{apprvdby,jdbcType=CHAR},
+      APPROVE2 = #{approve2,jdbcType=TIMESTAMP},
+      APPRV2BY = #{apprv2by,jdbcType=CHAR},
+      ORDSTAT = #{ordstat,jdbcType=CHAR},
+      TAXABLE = #{taxable,jdbcType=CHAR},
+      TAXEXEMP = #{taxexemp,jdbcType=CHAR},
+      SHIPADR1 = #{shipadr1,jdbcType=CHAR},
+      SHIPADR2 = #{shipadr2,jdbcType=CHAR},
+      SHIPADR3 = #{shipadr3,jdbcType=CHAR},
+      SHIPCITY = #{shipcity,jdbcType=CHAR},
+      SHIPST = #{shipst,jdbcType=CHAR},
+      SHIPZIP = #{shipzip,jdbcType=CHAR},
+      BILLADR1 = #{billadr1,jdbcType=CHAR},
+      BILLADR2 = #{billadr2,jdbcType=CHAR},
+      BILLADR3 = #{billadr3,jdbcType=CHAR},
+      BILLCITY = #{billcity,jdbcType=CHAR},
+      BILLST = #{billst,jdbcType=CHAR},
+      BILLZIP = #{billzip,jdbcType=CHAR},
+      SITEID = #{siteid,jdbcType=CHAR},
+      CURRCODE = #{currcode,jdbcType=CHAR},
+      TOTAL = #{total,jdbcType=DECIMAL},
+      TYPE = #{type,jdbcType=CHAR},
+      PRNTDATE = #{prntdate,jdbcType=TIMESTAMP},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      USERID = #{userid,jdbcType=CHAR},
+      INVOICE = #{invoice,jdbcType=CHAR},
+      REFPONUM = #{refponum,jdbcType=CHAR},
+      INTERNAL = #{internal,jdbcType=CHAR},
+      SHIPCOST = #{shipcost,jdbcType=DECIMAL},
+      FREIGHT = #{freight,jdbcType=CHAR},
+      BLKTPONUM = #{blktponum,jdbcType=CHAR},
+      CROSSSITE = #{crosssite,jdbcType=CHAR},
+      ALLOCODE = #{allocode,jdbcType=CHAR},
+      OUTSIDEBUD = #{outsidebud,jdbcType=CHAR},
+      ESTEXPPED = #{estexpped,jdbcType=CHAR},
+      EXPCTRLFLAG = #{expctrlflag,jdbcType=CHAR},
+      STDATE = #{stdate,jdbcType=TIMESTAMP},
+      ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+      RECHARGE = #{recharge,jdbcType=CHAR},
+      VOIDBY = #{voidby,jdbcType=CHAR},
+      VOIDDATE = #{voiddate,jdbcType=TIMESTAMP},
+      ATTACHID = #{attachid,jdbcType=CHAR},
+      BPAYBILLCODE = #{bpaybillcode,jdbcType=CHAR},
+      BPAYCUSTREF = #{bpaycustref,jdbcType=CHAR},
+      STAGE = #{stage,jdbcType=CHAR},
+      CLARITYTRANSFER = #{claritytransfer,jdbcType=CHAR},
+      CLATTACHID = #{clattachid,jdbcType=CHAR},
+      ADDLDESC = #{addldesc,jdbcType=LONGVARCHAR},
+      VOIDCOMM = #{voidcomm,jdbcType=LONGVARCHAR},
+      COMMENTS = #{comments,jdbcType=LONGVARCHAR}
+    where PONUM = #{ponum,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.colliers.mri.pojo.Pohd">
+    update POHD
+    set POPREFX = #{poprefx,jdbcType=CHAR},
+      VENDID = #{vendid,jdbcType=CHAR},
+      VENDSUB = #{vendsub,jdbcType=CHAR},
+      ENTERED = #{entered,jdbcType=TIMESTAMP},
+      PODESC = #{podesc,jdbcType=CHAR},
+      REQBY = #{reqby,jdbcType=CHAR},
+      TERMS = #{terms,jdbcType=CHAR},
+      DELVDATE = #{delvdate,jdbcType=TIMESTAMP},
+      CONTACT = #{contact,jdbcType=CHAR},
+      CONTPHON = #{contphon,jdbcType=CHAR},
+      SHIPVIA = #{shipvia,jdbcType=CHAR},
+      CANCLAFT = #{canclaft,jdbcType=TIMESTAMP},
+      APPROVED = #{approved,jdbcType=TIMESTAMP},
+      APPRVDBY = #{apprvdby,jdbcType=CHAR},
+      APPROVE2 = #{approve2,jdbcType=TIMESTAMP},
+      APPRV2BY = #{apprv2by,jdbcType=CHAR},
+      ORDSTAT = #{ordstat,jdbcType=CHAR},
+      TAXABLE = #{taxable,jdbcType=CHAR},
+      TAXEXEMP = #{taxexemp,jdbcType=CHAR},
+      SHIPADR1 = #{shipadr1,jdbcType=CHAR},
+      SHIPADR2 = #{shipadr2,jdbcType=CHAR},
+      SHIPADR3 = #{shipadr3,jdbcType=CHAR},
+      SHIPCITY = #{shipcity,jdbcType=CHAR},
+      SHIPST = #{shipst,jdbcType=CHAR},
+      SHIPZIP = #{shipzip,jdbcType=CHAR},
+      BILLADR1 = #{billadr1,jdbcType=CHAR},
+      BILLADR2 = #{billadr2,jdbcType=CHAR},
+      BILLADR3 = #{billadr3,jdbcType=CHAR},
+      BILLCITY = #{billcity,jdbcType=CHAR},
+      BILLST = #{billst,jdbcType=CHAR},
+      BILLZIP = #{billzip,jdbcType=CHAR},
+      SITEID = #{siteid,jdbcType=CHAR},
+      CURRCODE = #{currcode,jdbcType=CHAR},
+      TOTAL = #{total,jdbcType=DECIMAL},
+      TYPE = #{type,jdbcType=CHAR},
+      PRNTDATE = #{prntdate,jdbcType=TIMESTAMP},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      USERID = #{userid,jdbcType=CHAR},
+      INVOICE = #{invoice,jdbcType=CHAR},
+      REFPONUM = #{refponum,jdbcType=CHAR},
+      INTERNAL = #{internal,jdbcType=CHAR},
+      SHIPCOST = #{shipcost,jdbcType=DECIMAL},
+      FREIGHT = #{freight,jdbcType=CHAR},
+      BLKTPONUM = #{blktponum,jdbcType=CHAR},
+      CROSSSITE = #{crosssite,jdbcType=CHAR},
+      ALLOCODE = #{allocode,jdbcType=CHAR},
+      OUTSIDEBUD = #{outsidebud,jdbcType=CHAR},
+      ESTEXPPED = #{estexpped,jdbcType=CHAR},
+      EXPCTRLFLAG = #{expctrlflag,jdbcType=CHAR},
+      STDATE = #{stdate,jdbcType=TIMESTAMP},
+      ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+      RECHARGE = #{recharge,jdbcType=CHAR},
+      VOIDBY = #{voidby,jdbcType=CHAR},
+      VOIDDATE = #{voiddate,jdbcType=TIMESTAMP},
+      ATTACHID = #{attachid,jdbcType=CHAR},
+      BPAYBILLCODE = #{bpaybillcode,jdbcType=CHAR},
+      BPAYCUSTREF = #{bpaycustref,jdbcType=CHAR},
+      STAGE = #{stage,jdbcType=CHAR},
+      CLARITYTRANSFER = #{claritytransfer,jdbcType=CHAR},
+      CLATTACHID = #{clattachid,jdbcType=CHAR}
+    where PONUM = #{ponum,jdbcType=CHAR}
+  </update>
+</mapper>

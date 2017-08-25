@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.colliers.mri.mapper.BudgetsMapper">
+  <resultMap id="BaseResultMap" type="com.colliers.mri.pojo.Budgets">
+    <id column="ACCTNUM" jdbcType="CHAR" property="acctnum" />
+    <id column="ENTITYID" jdbcType="CHAR" property="entityid" />
+    <id column="DEPARTMENT" jdbcType="CHAR" property="department" />
+    <id column="BASIS" jdbcType="CHAR" property="basis" />
+    <id column="BUDTYPE" jdbcType="CHAR" property="budtype" />
+    <id column="PERIOD" jdbcType="CHAR" property="period" />
+    <result column="ACTIVITY" jdbcType="DECIMAL" property="activity" />
+    <result column="LASTDATE" jdbcType="TIMESTAMP" property="lastdate" />
+    <result column="USERID" jdbcType="CHAR" property="userid" />
+    <result column="LOCKED" jdbcType="CHAR" property="locked" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ACCTNUM, ENTITYID, DEPARTMENT, BASIS, BUDTYPE, PERIOD, ACTIVITY, LASTDATE, USERID, 
+    LOCKED
+  </sql>
+  <select id="selectByExample" parameterType="com.colliers.mri.pojo.BudgetsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BUDGETS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.colliers.mri.pojo.BudgetsKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BUDGETS
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+      and ENTITYID = #{entityid,jdbcType=CHAR}
+      and DEPARTMENT = #{department,jdbcType=CHAR}
+      and BASIS = #{basis,jdbcType=CHAR}
+      and BUDTYPE = #{budtype,jdbcType=CHAR}
+      and PERIOD = #{period,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.colliers.mri.pojo.BudgetsKey">
+    delete from BUDGETS
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+      and ENTITYID = #{entityid,jdbcType=CHAR}
+      and DEPARTMENT = #{department,jdbcType=CHAR}
+      and BASIS = #{basis,jdbcType=CHAR}
+      and BUDTYPE = #{budtype,jdbcType=CHAR}
+      and PERIOD = #{period,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.colliers.mri.pojo.BudgetsExample">
+    delete from BUDGETS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.colliers.mri.pojo.Budgets">
+    insert into BUDGETS (ACCTNUM, ENTITYID, DEPARTMENT, 
+      BASIS, BUDTYPE, PERIOD, ACTIVITY, 
+      LASTDATE, USERID, LOCKED
+      )
+    values (#{acctnum,jdbcType=CHAR}, #{entityid,jdbcType=CHAR}, #{department,jdbcType=CHAR}, 
+      #{basis,jdbcType=CHAR}, #{budtype,jdbcType=CHAR}, #{period,jdbcType=CHAR}, #{activity,jdbcType=DECIMAL}, 
+      #{lastdate,jdbcType=TIMESTAMP}, #{userid,jdbcType=CHAR}, #{locked,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.colliers.mri.pojo.Budgets">
+    insert into BUDGETS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acctnum != null">
+        ACCTNUM,
+      </if>
+      <if test="entityid != null">
+        ENTITYID,
+      </if>
+      <if test="department != null">
+        DEPARTMENT,
+      </if>
+      <if test="basis != null">
+        BASIS,
+      </if>
+      <if test="budtype != null">
+        BUDTYPE,
+      </if>
+      <if test="period != null">
+        PERIOD,
+      </if>
+      <if test="activity != null">
+        ACTIVITY,
+      </if>
+      <if test="lastdate != null">
+        LASTDATE,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="locked != null">
+        LOCKED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acctnum != null">
+        #{acctnum,jdbcType=CHAR},
+      </if>
+      <if test="entityid != null">
+        #{entityid,jdbcType=CHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=CHAR},
+      </if>
+      <if test="basis != null">
+        #{basis,jdbcType=CHAR},
+      </if>
+      <if test="budtype != null">
+        #{budtype,jdbcType=CHAR},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=CHAR},
+      </if>
+      <if test="activity != null">
+        #{activity,jdbcType=DECIMAL},
+      </if>
+      <if test="lastdate != null">
+        #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.colliers.mri.pojo.BudgetsExample" resultType="java.lang.Long">
+    select count(*) from BUDGETS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BUDGETS
+    <set>
+      <if test="record.acctnum != null">
+        ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      </if>
+      <if test="record.entityid != null">
+        ENTITYID = #{record.entityid,jdbcType=CHAR},
+      </if>
+      <if test="record.department != null">
+        DEPARTMENT = #{record.department,jdbcType=CHAR},
+      </if>
+      <if test="record.basis != null">
+        BASIS = #{record.basis,jdbcType=CHAR},
+      </if>
+      <if test="record.budtype != null">
+        BUDTYPE = #{record.budtype,jdbcType=CHAR},
+      </if>
+      <if test="record.period != null">
+        PERIOD = #{record.period,jdbcType=CHAR},
+      </if>
+      <if test="record.activity != null">
+        ACTIVITY = #{record.activity,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastdate != null">
+        LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=CHAR},
+      </if>
+      <if test="record.locked != null">
+        LOCKED = #{record.locked,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BUDGETS
+    set ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      ENTITYID = #{record.entityid,jdbcType=CHAR},
+      DEPARTMENT = #{record.department,jdbcType=CHAR},
+      BASIS = #{record.basis,jdbcType=CHAR},
+      BUDTYPE = #{record.budtype,jdbcType=CHAR},
+      PERIOD = #{record.period,jdbcType=CHAR},
+      ACTIVITY = #{record.activity,jdbcType=DECIMAL},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      USERID = #{record.userid,jdbcType=CHAR},
+      LOCKED = #{record.locked,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.colliers.mri.pojo.Budgets">
+    update BUDGETS
+    <set>
+      <if test="activity != null">
+        ACTIVITY = #{activity,jdbcType=DECIMAL},
+      </if>
+      <if test="lastdate != null">
+        LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="locked != null">
+        LOCKED = #{locked,jdbcType=CHAR},
+      </if>
+    </set>
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+      and ENTITYID = #{entityid,jdbcType=CHAR}
+      and DEPARTMENT = #{department,jdbcType=CHAR}
+      and BASIS = #{basis,jdbcType=CHAR}
+      and BUDTYPE = #{budtype,jdbcType=CHAR}
+      and PERIOD = #{period,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.colliers.mri.pojo.Budgets">
+    update BUDGETS
+    set ACTIVITY = #{activity,jdbcType=DECIMAL},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      USERID = #{userid,jdbcType=CHAR},
+      LOCKED = #{locked,jdbcType=CHAR}
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+      and ENTITYID = #{entityid,jdbcType=CHAR}
+      and DEPARTMENT = #{department,jdbcType=CHAR}
+      and BASIS = #{basis,jdbcType=CHAR}
+      and BUDTYPE = #{budtype,jdbcType=CHAR}
+      and PERIOD = #{period,jdbcType=CHAR}
+  </update>
+</mapper>

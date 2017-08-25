@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.colliers.mri.mapper.GarrMapper">
+  <resultMap id="BaseResultMap" type="com.colliers.mri.pojo.Garr">
+    <id column="GROUPID" jdbcType="CHAR" property="groupid" />
+    <id column="LEDGCODE" jdbcType="CHAR" property="ledgcode" />
+    <id column="BEGACCT" jdbcType="CHAR" property="begacct" />
+    <result column="ENDACCT" jdbcType="CHAR" property="endacct" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    GROUPID, LEDGCODE, BEGACCT, ENDACCT
+  </sql>
+  <select id="selectByExample" parameterType="com.colliers.mri.pojo.GarrExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from GARR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.colliers.mri.pojo.GarrKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GARR
+    where GROUPID = #{groupid,jdbcType=CHAR}
+      and LEDGCODE = #{ledgcode,jdbcType=CHAR}
+      and BEGACCT = #{begacct,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.colliers.mri.pojo.GarrKey">
+    delete from GARR
+    where GROUPID = #{groupid,jdbcType=CHAR}
+      and LEDGCODE = #{ledgcode,jdbcType=CHAR}
+      and BEGACCT = #{begacct,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.colliers.mri.pojo.GarrExample">
+    delete from GARR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.colliers.mri.pojo.Garr">
+    insert into GARR (GROUPID, LEDGCODE, BEGACCT, 
+      ENDACCT)
+    values (#{groupid,jdbcType=CHAR}, #{ledgcode,jdbcType=CHAR}, #{begacct,jdbcType=CHAR}, 
+      #{endacct,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.colliers.mri.pojo.Garr">
+    insert into GARR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupid != null">
+        GROUPID,
+      </if>
+      <if test="ledgcode != null">
+        LEDGCODE,
+      </if>
+      <if test="begacct != null">
+        BEGACCT,
+      </if>
+      <if test="endacct != null">
+        ENDACCT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupid != null">
+        #{groupid,jdbcType=CHAR},
+      </if>
+      <if test="ledgcode != null">
+        #{ledgcode,jdbcType=CHAR},
+      </if>
+      <if test="begacct != null">
+        #{begacct,jdbcType=CHAR},
+      </if>
+      <if test="endacct != null">
+        #{endacct,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.colliers.mri.pojo.GarrExample" resultType="java.lang.Long">
+    select count(*) from GARR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update GARR
+    <set>
+      <if test="record.groupid != null">
+        GROUPID = #{record.groupid,jdbcType=CHAR},
+      </if>
+      <if test="record.ledgcode != null">
+        LEDGCODE = #{record.ledgcode,jdbcType=CHAR},
+      </if>
+      <if test="record.begacct != null">
+        BEGACCT = #{record.begacct,jdbcType=CHAR},
+      </if>
+      <if test="record.endacct != null">
+        ENDACCT = #{record.endacct,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update GARR
+    set GROUPID = #{record.groupid,jdbcType=CHAR},
+      LEDGCODE = #{record.ledgcode,jdbcType=CHAR},
+      BEGACCT = #{record.begacct,jdbcType=CHAR},
+      ENDACCT = #{record.endacct,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.colliers.mri.pojo.Garr">
+    update GARR
+    <set>
+      <if test="endacct != null">
+        ENDACCT = #{endacct,jdbcType=CHAR},
+      </if>
+    </set>
+    where GROUPID = #{groupid,jdbcType=CHAR}
+      and LEDGCODE = #{ledgcode,jdbcType=CHAR}
+      and BEGACCT = #{begacct,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.colliers.mri.pojo.Garr">
+    update GARR
+    set ENDACCT = #{endacct,jdbcType=CHAR}
+    where GROUPID = #{groupid,jdbcType=CHAR}
+      and LEDGCODE = #{ledgcode,jdbcType=CHAR}
+      and BEGACCT = #{begacct,jdbcType=CHAR}
+  </update>
+</mapper>

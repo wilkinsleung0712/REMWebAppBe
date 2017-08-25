@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.colliers.mri.mapper.GaccMapper">
+  <resultMap id="BaseResultMap" type="com.colliers.mri.pojo.Gacc">
+    <id column="ACCTNUM" jdbcType="CHAR" property="acctnum" />
+    <result column="ACCTNAME" jdbcType="CHAR" property="acctname" />
+    <result column="TYPE" jdbcType="CHAR" property="type" />
+    <result column="LASTDATE" jdbcType="TIMESTAMP" property="lastdate" />
+    <result column="USERID" jdbcType="CHAR" property="userid" />
+    <result column="M_1099ACCT" jdbcType="CHAR" property="m1099acct" />
+    <result column="DPRSTR" jdbcType="CHAR" property="dprstr" />
+    <result column="PEXCHTYPE" jdbcType="CHAR" property="pexchtype" />
+    <result column="OWNERTAX" jdbcType="CHAR" property="ownertax" />
+    <result column="SUBWITH" jdbcType="CHAR" property="subwith" />
+    <result column="ACCTBASIS" jdbcType="CHAR" property="acctbasis" />
+    <result column="LEGALACCT" jdbcType="CHAR" property="legalacct" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ACCTNUM, ACCTNAME, TYPE, LASTDATE, USERID, M_1099ACCT, DPRSTR, PEXCHTYPE, OWNERTAX, 
+    SUBWITH, ACCTBASIS, LEGALACCT
+  </sql>
+  <select id="selectByExample" parameterType="com.colliers.mri.pojo.GaccExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from GACC
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GACC
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from GACC
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.colliers.mri.pojo.GaccExample">
+    delete from GACC
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.colliers.mri.pojo.Gacc">
+    insert into GACC (ACCTNUM, ACCTNAME, TYPE, 
+      LASTDATE, USERID, M_1099ACCT, 
+      DPRSTR, PEXCHTYPE, OWNERTAX, 
+      SUBWITH, ACCTBASIS, LEGALACCT
+      )
+    values (#{acctnum,jdbcType=CHAR}, #{acctname,jdbcType=CHAR}, #{type,jdbcType=CHAR}, 
+      #{lastdate,jdbcType=TIMESTAMP}, #{userid,jdbcType=CHAR}, #{m1099acct,jdbcType=CHAR}, 
+      #{dprstr,jdbcType=CHAR}, #{pexchtype,jdbcType=CHAR}, #{ownertax,jdbcType=CHAR}, 
+      #{subwith,jdbcType=CHAR}, #{acctbasis,jdbcType=CHAR}, #{legalacct,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.colliers.mri.pojo.Gacc">
+    insert into GACC
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acctnum != null">
+        ACCTNUM,
+      </if>
+      <if test="acctname != null">
+        ACCTNAME,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="lastdate != null">
+        LASTDATE,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="m1099acct != null">
+        M_1099ACCT,
+      </if>
+      <if test="dprstr != null">
+        DPRSTR,
+      </if>
+      <if test="pexchtype != null">
+        PEXCHTYPE,
+      </if>
+      <if test="ownertax != null">
+        OWNERTAX,
+      </if>
+      <if test="subwith != null">
+        SUBWITH,
+      </if>
+      <if test="acctbasis != null">
+        ACCTBASIS,
+      </if>
+      <if test="legalacct != null">
+        LEGALACCT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acctnum != null">
+        #{acctnum,jdbcType=CHAR},
+      </if>
+      <if test="acctname != null">
+        #{acctname,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="lastdate != null">
+        #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="m1099acct != null">
+        #{m1099acct,jdbcType=CHAR},
+      </if>
+      <if test="dprstr != null">
+        #{dprstr,jdbcType=CHAR},
+      </if>
+      <if test="pexchtype != null">
+        #{pexchtype,jdbcType=CHAR},
+      </if>
+      <if test="ownertax != null">
+        #{ownertax,jdbcType=CHAR},
+      </if>
+      <if test="subwith != null">
+        #{subwith,jdbcType=CHAR},
+      </if>
+      <if test="acctbasis != null">
+        #{acctbasis,jdbcType=CHAR},
+      </if>
+      <if test="legalacct != null">
+        #{legalacct,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.colliers.mri.pojo.GaccExample" resultType="java.lang.Long">
+    select count(*) from GACC
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update GACC
+    <set>
+      <if test="record.acctnum != null">
+        ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      </if>
+      <if test="record.acctname != null">
+        ACCTNAME = #{record.acctname,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.lastdate != null">
+        LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=CHAR},
+      </if>
+      <if test="record.m1099acct != null">
+        M_1099ACCT = #{record.m1099acct,jdbcType=CHAR},
+      </if>
+      <if test="record.dprstr != null">
+        DPRSTR = #{record.dprstr,jdbcType=CHAR},
+      </if>
+      <if test="record.pexchtype != null">
+        PEXCHTYPE = #{record.pexchtype,jdbcType=CHAR},
+      </if>
+      <if test="record.ownertax != null">
+        OWNERTAX = #{record.ownertax,jdbcType=CHAR},
+      </if>
+      <if test="record.subwith != null">
+        SUBWITH = #{record.subwith,jdbcType=CHAR},
+      </if>
+      <if test="record.acctbasis != null">
+        ACCTBASIS = #{record.acctbasis,jdbcType=CHAR},
+      </if>
+      <if test="record.legalacct != null">
+        LEGALACCT = #{record.legalacct,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update GACC
+    set ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      ACCTNAME = #{record.acctname,jdbcType=CHAR},
+      TYPE = #{record.type,jdbcType=CHAR},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      USERID = #{record.userid,jdbcType=CHAR},
+      M_1099ACCT = #{record.m1099acct,jdbcType=CHAR},
+      DPRSTR = #{record.dprstr,jdbcType=CHAR},
+      PEXCHTYPE = #{record.pexchtype,jdbcType=CHAR},
+      OWNERTAX = #{record.ownertax,jdbcType=CHAR},
+      SUBWITH = #{record.subwith,jdbcType=CHAR},
+      ACCTBASIS = #{record.acctbasis,jdbcType=CHAR},
+      LEGALACCT = #{record.legalacct,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.colliers.mri.pojo.Gacc">
+    update GACC
+    <set>
+      <if test="acctname != null">
+        ACCTNAME = #{acctname,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=CHAR},
+      </if>
+      <if test="lastdate != null">
+        LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="m1099acct != null">
+        M_1099ACCT = #{m1099acct,jdbcType=CHAR},
+      </if>
+      <if test="dprstr != null">
+        DPRSTR = #{dprstr,jdbcType=CHAR},
+      </if>
+      <if test="pexchtype != null">
+        PEXCHTYPE = #{pexchtype,jdbcType=CHAR},
+      </if>
+      <if test="ownertax != null">
+        OWNERTAX = #{ownertax,jdbcType=CHAR},
+      </if>
+      <if test="subwith != null">
+        SUBWITH = #{subwith,jdbcType=CHAR},
+      </if>
+      <if test="acctbasis != null">
+        ACCTBASIS = #{acctbasis,jdbcType=CHAR},
+      </if>
+      <if test="legalacct != null">
+        LEGALACCT = #{legalacct,jdbcType=CHAR},
+      </if>
+    </set>
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.colliers.mri.pojo.Gacc">
+    update GACC
+    set ACCTNAME = #{acctname,jdbcType=CHAR},
+      TYPE = #{type,jdbcType=CHAR},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      USERID = #{userid,jdbcType=CHAR},
+      M_1099ACCT = #{m1099acct,jdbcType=CHAR},
+      DPRSTR = #{dprstr,jdbcType=CHAR},
+      PEXCHTYPE = #{pexchtype,jdbcType=CHAR},
+      OWNERTAX = #{ownertax,jdbcType=CHAR},
+      SUBWITH = #{subwith,jdbcType=CHAR},
+      ACCTBASIS = #{acctbasis,jdbcType=CHAR},
+      LEGALACCT = #{legalacct,jdbcType=CHAR}
+    where ACCTNUM = #{acctnum,jdbcType=CHAR}
+  </update>
+</mapper>

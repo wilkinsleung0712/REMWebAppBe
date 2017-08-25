@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.colliers.mri.mapper.VarienceReportMapper">
+
+    <select id="selectVarienceAccountCodeList" resultType="java.lang.String">
+        select distinct ACCTNUM from GLSUM  WHERE ENTITYID = #{entityId} AND PERIOD = #{period} and BASIS = #{basis} and acctnum like 'CI%' and REPLACE(acctnum,'CI','') between #{beginAcctRange} and #{endAcctRange}
+        UNION
+        select distinct ACCTNUM  from BUDGETS WHERE ENTITYID = #{entityId} AND PERIOD = #{period} and BASIS = #{basis} and acctnum like 'CI%' and REPLACE(acctnum,'CI','') between #{beginAcctRange} and #{endAcctRange}
+    </select>
+
+</mapper>

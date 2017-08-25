@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.colliers.mri.mapper.PodtMapper">
+  <resultMap id="BaseResultMap" type="com.colliers.mri.pojo.Podt">
+    <id column="PONUM" jdbcType="CHAR" property="ponum" />
+    <id column="LINENMBR" jdbcType="SMALLINT" property="linenmbr" />
+    <result column="POPREFX" jdbcType="CHAR" property="poprefx" />
+    <result column="ITEM" jdbcType="CHAR" property="item" />
+    <result column="ITEMDESC" jdbcType="CHAR" property="itemdesc" />
+    <result column="USERID" jdbcType="CHAR" property="userid" />
+    <result column="QTY" jdbcType="DECIMAL" property="qty" />
+    <result column="UNITMSR" jdbcType="CHAR" property="unitmsr" />
+    <result column="UNITCOST" jdbcType="DECIMAL" property="unitcost" />
+    <result column="NETCOST" jdbcType="DECIMAL" property="netcost" />
+    <result column="ORDSTAT" jdbcType="CHAR" property="ordstat" />
+    <result column="ALTITEM" jdbcType="CHAR" property="altitem" />
+    <result column="ITEMTYPE" jdbcType="CHAR" property="itemtype" />
+    <result column="ACCTNUM" jdbcType="CHAR" property="acctnum" />
+    <result column="DEPARTMENT" jdbcType="CHAR" property="department" />
+    <result column="JOBCODE" jdbcType="CHAR" property="jobcode" />
+    <result column="ENTITYID" jdbcType="CHAR" property="entityid" />
+    <result column="RECVQTY" jdbcType="TIMESTAMP" property="recvqty" />
+    <result column="RECEIVED" jdbcType="DECIMAL" property="received" />
+    <result column="INVOICED" jdbcType="DECIMAL" property="invoiced" />
+    <result column="REQNUM" jdbcType="CHAR" property="reqnum" />
+    <result column="WRKOID" jdbcType="CHAR" property="wrkoid" />
+    <result column="ATAXGRPID" jdbcType="CHAR" property="ataxgrpid" />
+    <result column="TAXCOST" jdbcType="DECIMAL" property="taxcost" />
+    <result column="TOTCOST" jdbcType="DECIMAL" property="totcost" />
+    <result column="QTYPE" jdbcType="CHAR" property="qtype" />
+    <result column="AMTRECVD" jdbcType="DECIMAL" property="amtrecvd" />
+    <result column="AMTINVCD" jdbcType="DECIMAL" property="amtinvcd" />
+    <result column="CURRCODE" jdbcType="CHAR" property="currcode" />
+    <result column="JC_PHASECODE" jdbcType="CHAR" property="jcPhasecode" />
+    <result column="JC_COSTLIST" jdbcType="CHAR" property="jcCostlist" />
+    <result column="JC_COSTCODE" jdbcType="CHAR" property="jcCostcode" />
+    <result column="CATEGORY" jdbcType="CHAR" property="category" />
+    <result column="LASTDATE" jdbcType="TIMESTAMP" property="lastdate" />
+    <result column="CROSSSITE" jdbcType="CHAR" property="crosssite" />
+    <result column="ACCRUE" jdbcType="CHAR" property="accrue" />
+    <result column="PREPAY" jdbcType="CHAR" property="prepay" />
+    <result column="LACCPER" jdbcType="CHAR" property="laccper" />
+    <result column="LPREPPER" jdbcType="CHAR" property="lprepper" />
+    <result column="RWSTDATE" jdbcType="TIMESTAMP" property="rwstdate" />
+    <result column="RWENDATE" jdbcType="TIMESTAMP" property="rwendate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.colliers.mri.pojo.Podt">
+    <result column="ADDLDESC" jdbcType="LONGVARCHAR" property="addldesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PONUM, LINENMBR, POPREFX, ITEM, ITEMDESC, USERID, QTY, UNITMSR, UNITCOST, NETCOST, 
+    ORDSTAT, ALTITEM, ITEMTYPE, ACCTNUM, DEPARTMENT, JOBCODE, ENTITYID, RECVQTY, RECEIVED, 
+    INVOICED, REQNUM, WRKOID, ATAXGRPID, TAXCOST, TOTCOST, QTYPE, AMTRECVD, AMTINVCD, 
+    CURRCODE, JC_PHASECODE, JC_COSTLIST, JC_COSTCODE, CATEGORY, LASTDATE, CROSSSITE, 
+    ACCRUE, PREPAY, LACCPER, LPREPPER, RWSTDATE, RWENDATE
+  </sql>
+  <sql id="Blob_Column_List">
+    ADDLDESC
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.colliers.mri.pojo.PodtExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PODT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.colliers.mri.pojo.PodtExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from PODT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.colliers.mri.pojo.PodtKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PODT
+    where PONUM = #{ponum,jdbcType=CHAR}
+      and LINENMBR = #{linenmbr,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.colliers.mri.pojo.PodtKey">
+    delete from PODT
+    where PONUM = #{ponum,jdbcType=CHAR}
+      and LINENMBR = #{linenmbr,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.colliers.mri.pojo.PodtExample">
+    delete from PODT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.colliers.mri.pojo.Podt">
+    insert into PODT (PONUM, LINENMBR, POPREFX, 
+      ITEM, ITEMDESC, USERID, QTY, 
+      UNITMSR, UNITCOST, NETCOST, 
+      ORDSTAT, ALTITEM, ITEMTYPE, 
+      ACCTNUM, DEPARTMENT, JOBCODE, 
+      ENTITYID, RECVQTY, RECEIVED, 
+      INVOICED, REQNUM, WRKOID, 
+      ATAXGRPID, TAXCOST, TOTCOST, 
+      QTYPE, AMTRECVD, AMTINVCD, 
+      CURRCODE, JC_PHASECODE, JC_COSTLIST, 
+      JC_COSTCODE, CATEGORY, LASTDATE, 
+      CROSSSITE, ACCRUE, PREPAY, LACCPER, 
+      LPREPPER, RWSTDATE, RWENDATE, 
+      ADDLDESC)
+    values (#{ponum,jdbcType=CHAR}, #{linenmbr,jdbcType=SMALLINT}, #{poprefx,jdbcType=CHAR}, 
+      #{item,jdbcType=CHAR}, #{itemdesc,jdbcType=CHAR}, #{userid,jdbcType=CHAR}, #{qty,jdbcType=DECIMAL}, 
+      #{unitmsr,jdbcType=CHAR}, #{unitcost,jdbcType=DECIMAL}, #{netcost,jdbcType=DECIMAL}, 
+      #{ordstat,jdbcType=CHAR}, #{altitem,jdbcType=CHAR}, #{itemtype,jdbcType=CHAR}, 
+      #{acctnum,jdbcType=CHAR}, #{department,jdbcType=CHAR}, #{jobcode,jdbcType=CHAR}, 
+      #{entityid,jdbcType=CHAR}, #{recvqty,jdbcType=TIMESTAMP}, #{received,jdbcType=DECIMAL}, 
+      #{invoiced,jdbcType=DECIMAL}, #{reqnum,jdbcType=CHAR}, #{wrkoid,jdbcType=CHAR}, 
+      #{ataxgrpid,jdbcType=CHAR}, #{taxcost,jdbcType=DECIMAL}, #{totcost,jdbcType=DECIMAL}, 
+      #{qtype,jdbcType=CHAR}, #{amtrecvd,jdbcType=DECIMAL}, #{amtinvcd,jdbcType=DECIMAL}, 
+      #{currcode,jdbcType=CHAR}, #{jcPhasecode,jdbcType=CHAR}, #{jcCostlist,jdbcType=CHAR}, 
+      #{jcCostcode,jdbcType=CHAR}, #{category,jdbcType=CHAR}, #{lastdate,jdbcType=TIMESTAMP}, 
+      #{crosssite,jdbcType=CHAR}, #{accrue,jdbcType=CHAR}, #{prepay,jdbcType=CHAR}, #{laccper,jdbcType=CHAR}, 
+      #{lprepper,jdbcType=CHAR}, #{rwstdate,jdbcType=TIMESTAMP}, #{rwendate,jdbcType=TIMESTAMP}, 
+      #{addldesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.colliers.mri.pojo.Podt">
+    insert into PODT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ponum != null">
+        PONUM,
+      </if>
+      <if test="linenmbr != null">
+        LINENMBR,
+      </if>
+      <if test="poprefx != null">
+        POPREFX,
+      </if>
+      <if test="item != null">
+        ITEM,
+      </if>
+      <if test="itemdesc != null">
+        ITEMDESC,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="qty != null">
+        QTY,
+      </if>
+      <if test="unitmsr != null">
+        UNITMSR,
+      </if>
+      <if test="unitcost != null">
+        UNITCOST,
+      </if>
+      <if test="netcost != null">
+        NETCOST,
+      </if>
+      <if test="ordstat != null">
+        ORDSTAT,
+      </if>
+      <if test="altitem != null">
+        ALTITEM,
+      </if>
+      <if test="itemtype != null">
+        ITEMTYPE,
+      </if>
+      <if test="acctnum != null">
+        ACCTNUM,
+      </if>
+      <if test="department != null">
+        DEPARTMENT,
+      </if>
+      <if test="jobcode != null">
+        JOBCODE,
+      </if>
+      <if test="entityid != null">
+        ENTITYID,
+      </if>
+      <if test="recvqty != null">
+        RECVQTY,
+      </if>
+      <if test="received != null">
+        RECEIVED,
+      </if>
+      <if test="invoiced != null">
+        INVOICED,
+      </if>
+      <if test="reqnum != null">
+        REQNUM,
+      </if>
+      <if test="wrkoid != null">
+        WRKOID,
+      </if>
+      <if test="ataxgrpid != null">
+        ATAXGRPID,
+      </if>
+      <if test="taxcost != null">
+        TAXCOST,
+      </if>
+      <if test="totcost != null">
+        TOTCOST,
+      </if>
+      <if test="qtype != null">
+        QTYPE,
+      </if>
+      <if test="amtrecvd != null">
+        AMTRECVD,
+      </if>
+      <if test="amtinvcd != null">
+        AMTINVCD,
+      </if>
+      <if test="currcode != null">
+        CURRCODE,
+      </if>
+      <if test="jcPhasecode != null">
+        JC_PHASECODE,
+      </if>
+      <if test="jcCostlist != null">
+        JC_COSTLIST,
+      </if>
+      <if test="jcCostcode != null">
+        JC_COSTCODE,
+      </if>
+      <if test="category != null">
+        CATEGORY,
+      </if>
+      <if test="lastdate != null">
+        LASTDATE,
+      </if>
+      <if test="crosssite != null">
+        CROSSSITE,
+      </if>
+      <if test="accrue != null">
+        ACCRUE,
+      </if>
+      <if test="prepay != null">
+        PREPAY,
+      </if>
+      <if test="laccper != null">
+        LACCPER,
+      </if>
+      <if test="lprepper != null">
+        LPREPPER,
+      </if>
+      <if test="rwstdate != null">
+        RWSTDATE,
+      </if>
+      <if test="rwendate != null">
+        RWENDATE,
+      </if>
+      <if test="addldesc != null">
+        ADDLDESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ponum != null">
+        #{ponum,jdbcType=CHAR},
+      </if>
+      <if test="linenmbr != null">
+        #{linenmbr,jdbcType=SMALLINT},
+      </if>
+      <if test="poprefx != null">
+        #{poprefx,jdbcType=CHAR},
+      </if>
+      <if test="item != null">
+        #{item,jdbcType=CHAR},
+      </if>
+      <if test="itemdesc != null">
+        #{itemdesc,jdbcType=CHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="unitmsr != null">
+        #{unitmsr,jdbcType=CHAR},
+      </if>
+      <if test="unitcost != null">
+        #{unitcost,jdbcType=DECIMAL},
+      </if>
+      <if test="netcost != null">
+        #{netcost,jdbcType=DECIMAL},
+      </if>
+      <if test="ordstat != null">
+        #{ordstat,jdbcType=CHAR},
+      </if>
+      <if test="altitem != null">
+        #{altitem,jdbcType=CHAR},
+      </if>
+      <if test="itemtype != null">
+        #{itemtype,jdbcType=CHAR},
+      </if>
+      <if test="acctnum != null">
+        #{acctnum,jdbcType=CHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=CHAR},
+      </if>
+      <if test="jobcode != null">
+        #{jobcode,jdbcType=CHAR},
+      </if>
+      <if test="entityid != null">
+        #{entityid,jdbcType=CHAR},
+      </if>
+      <if test="recvqty != null">
+        #{recvqty,jdbcType=TIMESTAMP},
+      </if>
+      <if test="received != null">
+        #{received,jdbcType=DECIMAL},
+      </if>
+      <if test="invoiced != null">
+        #{invoiced,jdbcType=DECIMAL},
+      </if>
+      <if test="reqnum != null">
+        #{reqnum,jdbcType=CHAR},
+      </if>
+      <if test="wrkoid != null">
+        #{wrkoid,jdbcType=CHAR},
+      </if>
+      <if test="ataxgrpid != null">
+        #{ataxgrpid,jdbcType=CHAR},
+      </if>
+      <if test="taxcost != null">
+        #{taxcost,jdbcType=DECIMAL},
+      </if>
+      <if test="totcost != null">
+        #{totcost,jdbcType=DECIMAL},
+      </if>
+      <if test="qtype != null">
+        #{qtype,jdbcType=CHAR},
+      </if>
+      <if test="amtrecvd != null">
+        #{amtrecvd,jdbcType=DECIMAL},
+      </if>
+      <if test="amtinvcd != null">
+        #{amtinvcd,jdbcType=DECIMAL},
+      </if>
+      <if test="currcode != null">
+        #{currcode,jdbcType=CHAR},
+      </if>
+      <if test="jcPhasecode != null">
+        #{jcPhasecode,jdbcType=CHAR},
+      </if>
+      <if test="jcCostlist != null">
+        #{jcCostlist,jdbcType=CHAR},
+      </if>
+      <if test="jcCostcode != null">
+        #{jcCostcode,jdbcType=CHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=CHAR},
+      </if>
+      <if test="lastdate != null">
+        #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crosssite != null">
+        #{crosssite,jdbcType=CHAR},
+      </if>
+      <if test="accrue != null">
+        #{accrue,jdbcType=CHAR},
+      </if>
+      <if test="prepay != null">
+        #{prepay,jdbcType=CHAR},
+      </if>
+      <if test="laccper != null">
+        #{laccper,jdbcType=CHAR},
+      </if>
+      <if test="lprepper != null">
+        #{lprepper,jdbcType=CHAR},
+      </if>
+      <if test="rwstdate != null">
+        #{rwstdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rwendate != null">
+        #{rwendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addldesc != null">
+        #{addldesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.colliers.mri.pojo.PodtExample" resultType="java.lang.Long">
+    select count(*) from PODT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PODT
+    <set>
+      <if test="record.ponum != null">
+        PONUM = #{record.ponum,jdbcType=CHAR},
+      </if>
+      <if test="record.linenmbr != null">
+        LINENMBR = #{record.linenmbr,jdbcType=SMALLINT},
+      </if>
+      <if test="record.poprefx != null">
+        POPREFX = #{record.poprefx,jdbcType=CHAR},
+      </if>
+      <if test="record.item != null">
+        ITEM = #{record.item,jdbcType=CHAR},
+      </if>
+      <if test="record.itemdesc != null">
+        ITEMDESC = #{record.itemdesc,jdbcType=CHAR},
+      </if>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=CHAR},
+      </if>
+      <if test="record.qty != null">
+        QTY = #{record.qty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitmsr != null">
+        UNITMSR = #{record.unitmsr,jdbcType=CHAR},
+      </if>
+      <if test="record.unitcost != null">
+        UNITCOST = #{record.unitcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.netcost != null">
+        NETCOST = #{record.netcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ordstat != null">
+        ORDSTAT = #{record.ordstat,jdbcType=CHAR},
+      </if>
+      <if test="record.altitem != null">
+        ALTITEM = #{record.altitem,jdbcType=CHAR},
+      </if>
+      <if test="record.itemtype != null">
+        ITEMTYPE = #{record.itemtype,jdbcType=CHAR},
+      </if>
+      <if test="record.acctnum != null">
+        ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      </if>
+      <if test="record.department != null">
+        DEPARTMENT = #{record.department,jdbcType=CHAR},
+      </if>
+      <if test="record.jobcode != null">
+        JOBCODE = #{record.jobcode,jdbcType=CHAR},
+      </if>
+      <if test="record.entityid != null">
+        ENTITYID = #{record.entityid,jdbcType=CHAR},
+      </if>
+      <if test="record.recvqty != null">
+        RECVQTY = #{record.recvqty,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.received != null">
+        RECEIVED = #{record.received,jdbcType=DECIMAL},
+      </if>
+      <if test="record.invoiced != null">
+        INVOICED = #{record.invoiced,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reqnum != null">
+        REQNUM = #{record.reqnum,jdbcType=CHAR},
+      </if>
+      <if test="record.wrkoid != null">
+        WRKOID = #{record.wrkoid,jdbcType=CHAR},
+      </if>
+      <if test="record.ataxgrpid != null">
+        ATAXGRPID = #{record.ataxgrpid,jdbcType=CHAR},
+      </if>
+      <if test="record.taxcost != null">
+        TAXCOST = #{record.taxcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totcost != null">
+        TOTCOST = #{record.totcost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.qtype != null">
+        QTYPE = #{record.qtype,jdbcType=CHAR},
+      </if>
+      <if test="record.amtrecvd != null">
+        AMTRECVD = #{record.amtrecvd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.amtinvcd != null">
+        AMTINVCD = #{record.amtinvcd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.currcode != null">
+        CURRCODE = #{record.currcode,jdbcType=CHAR},
+      </if>
+      <if test="record.jcPhasecode != null">
+        JC_PHASECODE = #{record.jcPhasecode,jdbcType=CHAR},
+      </if>
+      <if test="record.jcCostlist != null">
+        JC_COSTLIST = #{record.jcCostlist,jdbcType=CHAR},
+      </if>
+      <if test="record.jcCostcode != null">
+        JC_COSTCODE = #{record.jcCostcode,jdbcType=CHAR},
+      </if>
+      <if test="record.category != null">
+        CATEGORY = #{record.category,jdbcType=CHAR},
+      </if>
+      <if test="record.lastdate != null">
+        LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.crosssite != null">
+        CROSSSITE = #{record.crosssite,jdbcType=CHAR},
+      </if>
+      <if test="record.accrue != null">
+        ACCRUE = #{record.accrue,jdbcType=CHAR},
+      </if>
+      <if test="record.prepay != null">
+        PREPAY = #{record.prepay,jdbcType=CHAR},
+      </if>
+      <if test="record.laccper != null">
+        LACCPER = #{record.laccper,jdbcType=CHAR},
+      </if>
+      <if test="record.lprepper != null">
+        LPREPPER = #{record.lprepper,jdbcType=CHAR},
+      </if>
+      <if test="record.rwstdate != null">
+        RWSTDATE = #{record.rwstdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rwendate != null">
+        RWENDATE = #{record.rwendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.addldesc != null">
+        ADDLDESC = #{record.addldesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update PODT
+    set PONUM = #{record.ponum,jdbcType=CHAR},
+      LINENMBR = #{record.linenmbr,jdbcType=SMALLINT},
+      POPREFX = #{record.poprefx,jdbcType=CHAR},
+      ITEM = #{record.item,jdbcType=CHAR},
+      ITEMDESC = #{record.itemdesc,jdbcType=CHAR},
+      USERID = #{record.userid,jdbcType=CHAR},
+      QTY = #{record.qty,jdbcType=DECIMAL},
+      UNITMSR = #{record.unitmsr,jdbcType=CHAR},
+      UNITCOST = #{record.unitcost,jdbcType=DECIMAL},
+      NETCOST = #{record.netcost,jdbcType=DECIMAL},
+      ORDSTAT = #{record.ordstat,jdbcType=CHAR},
+      ALTITEM = #{record.altitem,jdbcType=CHAR},
+      ITEMTYPE = #{record.itemtype,jdbcType=CHAR},
+      ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      DEPARTMENT = #{record.department,jdbcType=CHAR},
+      JOBCODE = #{record.jobcode,jdbcType=CHAR},
+      ENTITYID = #{record.entityid,jdbcType=CHAR},
+      RECVQTY = #{record.recvqty,jdbcType=TIMESTAMP},
+      RECEIVED = #{record.received,jdbcType=DECIMAL},
+      INVOICED = #{record.invoiced,jdbcType=DECIMAL},
+      REQNUM = #{record.reqnum,jdbcType=CHAR},
+      WRKOID = #{record.wrkoid,jdbcType=CHAR},
+      ATAXGRPID = #{record.ataxgrpid,jdbcType=CHAR},
+      TAXCOST = #{record.taxcost,jdbcType=DECIMAL},
+      TOTCOST = #{record.totcost,jdbcType=DECIMAL},
+      QTYPE = #{record.qtype,jdbcType=CHAR},
+      AMTRECVD = #{record.amtrecvd,jdbcType=DECIMAL},
+      AMTINVCD = #{record.amtinvcd,jdbcType=DECIMAL},
+      CURRCODE = #{record.currcode,jdbcType=CHAR},
+      JC_PHASECODE = #{record.jcPhasecode,jdbcType=CHAR},
+      JC_COSTLIST = #{record.jcCostlist,jdbcType=CHAR},
+      JC_COSTCODE = #{record.jcCostcode,jdbcType=CHAR},
+      CATEGORY = #{record.category,jdbcType=CHAR},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      CROSSSITE = #{record.crosssite,jdbcType=CHAR},
+      ACCRUE = #{record.accrue,jdbcType=CHAR},
+      PREPAY = #{record.prepay,jdbcType=CHAR},
+      LACCPER = #{record.laccper,jdbcType=CHAR},
+      LPREPPER = #{record.lprepper,jdbcType=CHAR},
+      RWSTDATE = #{record.rwstdate,jdbcType=TIMESTAMP},
+      RWENDATE = #{record.rwendate,jdbcType=TIMESTAMP},
+      ADDLDESC = #{record.addldesc,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PODT
+    set PONUM = #{record.ponum,jdbcType=CHAR},
+      LINENMBR = #{record.linenmbr,jdbcType=SMALLINT},
+      POPREFX = #{record.poprefx,jdbcType=CHAR},
+      ITEM = #{record.item,jdbcType=CHAR},
+      ITEMDESC = #{record.itemdesc,jdbcType=CHAR},
+      USERID = #{record.userid,jdbcType=CHAR},
+      QTY = #{record.qty,jdbcType=DECIMAL},
+      UNITMSR = #{record.unitmsr,jdbcType=CHAR},
+      UNITCOST = #{record.unitcost,jdbcType=DECIMAL},
+      NETCOST = #{record.netcost,jdbcType=DECIMAL},
+      ORDSTAT = #{record.ordstat,jdbcType=CHAR},
+      ALTITEM = #{record.altitem,jdbcType=CHAR},
+      ITEMTYPE = #{record.itemtype,jdbcType=CHAR},
+      ACCTNUM = #{record.acctnum,jdbcType=CHAR},
+      DEPARTMENT = #{record.department,jdbcType=CHAR},
+      JOBCODE = #{record.jobcode,jdbcType=CHAR},
+      ENTITYID = #{record.entityid,jdbcType=CHAR},
+      RECVQTY = #{record.recvqty,jdbcType=TIMESTAMP},
+      RECEIVED = #{record.received,jdbcType=DECIMAL},
+      INVOICED = #{record.invoiced,jdbcType=DECIMAL},
+      REQNUM = #{record.reqnum,jdbcType=CHAR},
+      WRKOID = #{record.wrkoid,jdbcType=CHAR},
+      ATAXGRPID = #{record.ataxgrpid,jdbcType=CHAR},
+      TAXCOST = #{record.taxcost,jdbcType=DECIMAL},
+      TOTCOST = #{record.totcost,jdbcType=DECIMAL},
+      QTYPE = #{record.qtype,jdbcType=CHAR},
+      AMTRECVD = #{record.amtrecvd,jdbcType=DECIMAL},
+      AMTINVCD = #{record.amtinvcd,jdbcType=DECIMAL},
+      CURRCODE = #{record.currcode,jdbcType=CHAR},
+      JC_PHASECODE = #{record.jcPhasecode,jdbcType=CHAR},
+      JC_COSTLIST = #{record.jcCostlist,jdbcType=CHAR},
+      JC_COSTCODE = #{record.jcCostcode,jdbcType=CHAR},
+      CATEGORY = #{record.category,jdbcType=CHAR},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      CROSSSITE = #{record.crosssite,jdbcType=CHAR},
+      ACCRUE = #{record.accrue,jdbcType=CHAR},
+      PREPAY = #{record.prepay,jdbcType=CHAR},
+      LACCPER = #{record.laccper,jdbcType=CHAR},
+      LPREPPER = #{record.lprepper,jdbcType=CHAR},
+      RWSTDATE = #{record.rwstdate,jdbcType=TIMESTAMP},
+      RWENDATE = #{record.rwendate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.colliers.mri.pojo.Podt">
+    update PODT
+    <set>
+      <if test="poprefx != null">
+        POPREFX = #{poprefx,jdbcType=CHAR},
+      </if>
+      <if test="item != null">
+        ITEM = #{item,jdbcType=CHAR},
+      </if>
+      <if test="itemdesc != null">
+        ITEMDESC = #{itemdesc,jdbcType=CHAR},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="qty != null">
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="unitmsr != null">
+        UNITMSR = #{unitmsr,jdbcType=CHAR},
+      </if>
+      <if test="unitcost != null">
+        UNITCOST = #{unitcost,jdbcType=DECIMAL},
+      </if>
+      <if test="netcost != null">
+        NETCOST = #{netcost,jdbcType=DECIMAL},
+      </if>
+      <if test="ordstat != null">
+        ORDSTAT = #{ordstat,jdbcType=CHAR},
+      </if>
+      <if test="altitem != null">
+        ALTITEM = #{altitem,jdbcType=CHAR},
+      </if>
+      <if test="itemtype != null">
+        ITEMTYPE = #{itemtype,jdbcType=CHAR},
+      </if>
+      <if test="acctnum != null">
+        ACCTNUM = #{acctnum,jdbcType=CHAR},
+      </if>
+      <if test="department != null">
+        DEPARTMENT = #{department,jdbcType=CHAR},
+      </if>
+      <if test="jobcode != null">
+        JOBCODE = #{jobcode,jdbcType=CHAR},
+      </if>
+      <if test="entityid != null">
+        ENTITYID = #{entityid,jdbcType=CHAR},
+      </if>
+      <if test="recvqty != null">
+        RECVQTY = #{recvqty,jdbcType=TIMESTAMP},
+      </if>
+      <if test="received != null">
+        RECEIVED = #{received,jdbcType=DECIMAL},
+      </if>
+      <if test="invoiced != null">
+        INVOICED = #{invoiced,jdbcType=DECIMAL},
+      </if>
+      <if test="reqnum != null">
+        REQNUM = #{reqnum,jdbcType=CHAR},
+      </if>
+      <if test="wrkoid != null">
+        WRKOID = #{wrkoid,jdbcType=CHAR},
+      </if>
+      <if test="ataxgrpid != null">
+        ATAXGRPID = #{ataxgrpid,jdbcType=CHAR},
+      </if>
+      <if test="taxcost != null">
+        TAXCOST = #{taxcost,jdbcType=DECIMAL},
+      </if>
+      <if test="totcost != null">
+        TOTCOST = #{totcost,jdbcType=DECIMAL},
+      </if>
+      <if test="qtype != null">
+        QTYPE = #{qtype,jdbcType=CHAR},
+      </if>
+      <if test="amtrecvd != null">
+        AMTRECVD = #{amtrecvd,jdbcType=DECIMAL},
+      </if>
+      <if test="amtinvcd != null">
+        AMTINVCD = #{amtinvcd,jdbcType=DECIMAL},
+      </if>
+      <if test="currcode != null">
+        CURRCODE = #{currcode,jdbcType=CHAR},
+      </if>
+      <if test="jcPhasecode != null">
+        JC_PHASECODE = #{jcPhasecode,jdbcType=CHAR},
+      </if>
+      <if test="jcCostlist != null">
+        JC_COSTLIST = #{jcCostlist,jdbcType=CHAR},
+      </if>
+      <if test="jcCostcode != null">
+        JC_COSTCODE = #{jcCostcode,jdbcType=CHAR},
+      </if>
+      <if test="category != null">
+        CATEGORY = #{category,jdbcType=CHAR},
+      </if>
+      <if test="lastdate != null">
+        LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crosssite != null">
+        CROSSSITE = #{crosssite,jdbcType=CHAR},
+      </if>
+      <if test="accrue != null">
+        ACCRUE = #{accrue,jdbcType=CHAR},
+      </if>
+      <if test="prepay != null">
+        PREPAY = #{prepay,jdbcType=CHAR},
+      </if>
+      <if test="laccper != null">
+        LACCPER = #{laccper,jdbcType=CHAR},
+      </if>
+      <if test="lprepper != null">
+        LPREPPER = #{lprepper,jdbcType=CHAR},
+      </if>
+      <if test="rwstdate != null">
+        RWSTDATE = #{rwstdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rwendate != null">
+        RWENDATE = #{rwendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addldesc != null">
+        ADDLDESC = #{addldesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PONUM = #{ponum,jdbcType=CHAR}
+      and LINENMBR = #{linenmbr,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.colliers.mri.pojo.Podt">
+    update PODT
+    set POPREFX = #{poprefx,jdbcType=CHAR},
+      ITEM = #{item,jdbcType=CHAR},
+      ITEMDESC = #{itemdesc,jdbcType=CHAR},
+      USERID = #{userid,jdbcType=CHAR},
+      QTY = #{qty,jdbcType=DECIMAL},
+      UNITMSR = #{unitmsr,jdbcType=CHAR},
+      UNITCOST = #{unitcost,jdbcType=DECIMAL},
+      NETCOST = #{netcost,jdbcType=DECIMAL},
+      ORDSTAT = #{ordstat,jdbcType=CHAR},
+      ALTITEM = #{altitem,jdbcType=CHAR},
+      ITEMTYPE = #{itemtype,jdbcType=CHAR},
+      ACCTNUM = #{acctnum,jdbcType=CHAR},
+      DEPARTMENT = #{department,jdbcType=CHAR},
+      JOBCODE = #{jobcode,jdbcType=CHAR},
+      ENTITYID = #{entityid,jdbcType=CHAR},
+      RECVQTY = #{recvqty,jdbcType=TIMESTAMP},
+      RECEIVED = #{received,jdbcType=DECIMAL},
+      INVOICED = #{invoiced,jdbcType=DECIMAL},
+      REQNUM = #{reqnum,jdbcType=CHAR},
+      WRKOID = #{wrkoid,jdbcType=CHAR},
+      ATAXGRPID = #{ataxgrpid,jdbcType=CHAR},
+      TAXCOST = #{taxcost,jdbcType=DECIMAL},
+      TOTCOST = #{totcost,jdbcType=DECIMAL},
+      QTYPE = #{qtype,jdbcType=CHAR},
+      AMTRECVD = #{amtrecvd,jdbcType=DECIMAL},
+      AMTINVCD = #{amtinvcd,jdbcType=DECIMAL},
+      CURRCODE = #{currcode,jdbcType=CHAR},
+      JC_PHASECODE = #{jcPhasecode,jdbcType=CHAR},
+      JC_COSTLIST = #{jcCostlist,jdbcType=CHAR},
+      JC_COSTCODE = #{jcCostcode,jdbcType=CHAR},
+      CATEGORY = #{category,jdbcType=CHAR},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      CROSSSITE = #{crosssite,jdbcType=CHAR},
+      ACCRUE = #{accrue,jdbcType=CHAR},
+      PREPAY = #{prepay,jdbcType=CHAR},
+      LACCPER = #{laccper,jdbcType=CHAR},
+      LPREPPER = #{lprepper,jdbcType=CHAR},
+      RWSTDATE = #{rwstdate,jdbcType=TIMESTAMP},
+      RWENDATE = #{rwendate,jdbcType=TIMESTAMP},
+      ADDLDESC = #{addldesc,jdbcType=LONGVARCHAR}
+    where PONUM = #{ponum,jdbcType=CHAR}
+      and LINENMBR = #{linenmbr,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.colliers.mri.pojo.Podt">
+    update PODT
+    set POPREFX = #{poprefx,jdbcType=CHAR},
+      ITEM = #{item,jdbcType=CHAR},
+      ITEMDESC = #{itemdesc,jdbcType=CHAR},
+      USERID = #{userid,jdbcType=CHAR},
+      QTY = #{qty,jdbcType=DECIMAL},
+      UNITMSR = #{unitmsr,jdbcType=CHAR},
+      UNITCOST = #{unitcost,jdbcType=DECIMAL},
+      NETCOST = #{netcost,jdbcType=DECIMAL},
+      ORDSTAT = #{ordstat,jdbcType=CHAR},
+      ALTITEM = #{altitem,jdbcType=CHAR},
+      ITEMTYPE = #{itemtype,jdbcType=CHAR},
+      ACCTNUM = #{acctnum,jdbcType=CHAR},
+      DEPARTMENT = #{department,jdbcType=CHAR},
+      JOBCODE = #{jobcode,jdbcType=CHAR},
+      ENTITYID = #{entityid,jdbcType=CHAR},
+      RECVQTY = #{recvqty,jdbcType=TIMESTAMP},
+      RECEIVED = #{received,jdbcType=DECIMAL},
+      INVOICED = #{invoiced,jdbcType=DECIMAL},
+      REQNUM = #{reqnum,jdbcType=CHAR},
+      WRKOID = #{wrkoid,jdbcType=CHAR},
+      ATAXGRPID = #{ataxgrpid,jdbcType=CHAR},
+      TAXCOST = #{taxcost,jdbcType=DECIMAL},
+      TOTCOST = #{totcost,jdbcType=DECIMAL},
+      QTYPE = #{qtype,jdbcType=CHAR},
+      AMTRECVD = #{amtrecvd,jdbcType=DECIMAL},
+      AMTINVCD = #{amtinvcd,jdbcType=DECIMAL},
+      CURRCODE = #{currcode,jdbcType=CHAR},
+      JC_PHASECODE = #{jcPhasecode,jdbcType=CHAR},
+      JC_COSTLIST = #{jcCostlist,jdbcType=CHAR},
+      JC_COSTCODE = #{jcCostcode,jdbcType=CHAR},
+      CATEGORY = #{category,jdbcType=CHAR},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      CROSSSITE = #{crosssite,jdbcType=CHAR},
+      ACCRUE = #{accrue,jdbcType=CHAR},
+      PREPAY = #{prepay,jdbcType=CHAR},
+      LACCPER = #{laccper,jdbcType=CHAR},
+      LPREPPER = #{lprepper,jdbcType=CHAR},
+      RWSTDATE = #{rwstdate,jdbcType=TIMESTAMP},
+      RWENDATE = #{rwendate,jdbcType=TIMESTAMP}
+    where PONUM = #{ponum,jdbcType=CHAR}
+      and LINENMBR = #{linenmbr,jdbcType=SMALLINT}
+  </update>
+</mapper>
