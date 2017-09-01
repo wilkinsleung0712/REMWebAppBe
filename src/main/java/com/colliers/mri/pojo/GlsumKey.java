@@ -9,7 +9,7 @@ public class GlsumKey {
 
     private String basis;
 
-    private String period;
+    private String endPeriod;
 
     private String balfor;
 
@@ -46,11 +46,11 @@ public class GlsumKey {
     }
 
     public String getPeriod() {
-        return period;
+        return endPeriod;
     }
 
-    public void setPeriod(String period) {
-        this.period = period == null ? null : period.trim();
+    public void setPeriod(String endPeriod) {
+        this.endPeriod = endPeriod == null ? null : endPeriod.trim();
     }
 
     public String getBalfor() {

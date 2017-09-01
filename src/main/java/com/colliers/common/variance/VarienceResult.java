@@ -1,27 +1,31 @@
 package com.colliers.common.variance;
 
+import com.colliers.common.type.NOTE_TYPE;
+
 public class VarienceResult {
     private String AcctNum;
     private String AcctDescription;
-    private String period;
+    private String endPeriod;
     private double actualMTD;
     private double budgetMTD;
     private double varianceDifference;
     private double variancePrecentage;
     private String comments;
+    private String noteType;
 
     public VarienceResult() {
     }
 
-    public VarienceResult(String acctNum, String acctDescription, String period, double actualMTD, double budgetMTD, double varianceDifference, double variancePrecentage, String comments) {
+    public VarienceResult(String acctNum, String acctDescription, String endPeriod, double actualMTD, double budgetMTD, double varianceDifference, double variancePrecentage, String comments, String noteType) {
         AcctNum = acctNum;
         AcctDescription = acctDescription;
-        this.period = period;
+        this.endPeriod = endPeriod;
         this.actualMTD = actualMTD;
         this.budgetMTD = budgetMTD;
         this.varianceDifference = varianceDifference;
         this.variancePrecentage = variancePrecentage;
         this.comments = comments;
+        this.noteType = noteType;
     }
 
     public String getAcctNum() {
@@ -41,11 +45,11 @@ public class VarienceResult {
     }
 
     public String getPeriod() {
-        return period;
+        return endPeriod;
     }
 
-    public void setPeriod(String period) {
-        this.period = period;
+    public void setPeriod(String endPeriod) {
+        this.endPeriod = endPeriod;
     }
 
     public double getActualMTD() {
@@ -88,17 +92,34 @@ public class VarienceResult {
         this.comments = comments;
     }
 
+    public String getEndPeriod() {
+        return endPeriod;
+    }
+
+    public void setEndPeriod(String endPeriod) {
+        this.endPeriod = endPeriod;
+    }
+
+    public String getNoteType() {
+        return noteType;
+    }
+
+    public void setNoteType(String noteType) {
+        this.noteType = noteType;
+    }
+
     @Override
     public String toString() {
         return "VarienceResult{" +
                 "AcctNum='" + AcctNum + '\'' +
                 ", AcctDescription='" + AcctDescription + '\'' +
-                ", period='" + period + '\'' +
+                ", endPeriod='" + endPeriod + '\'' +
                 ", actualMTD=" + actualMTD +
                 ", budgetMTD=" + budgetMTD +
                 ", varianceDifference=" + varianceDifference +
                 ", variancePrecentage=" + variancePrecentage +
                 ", comments='" + comments + '\'' +
+                ", noteType='" + noteType + '\'' +
                 '}';
     }
 }

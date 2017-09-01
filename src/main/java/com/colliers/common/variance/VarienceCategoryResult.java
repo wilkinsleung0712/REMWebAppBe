@@ -1,12 +1,15 @@
 package com.colliers.common.variance;
 
+import com.colliers.common.type.BASIS;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class VarienceCategoryResult {
     private String entityId;
-    private String period;
+    private String endPeriod;
     private String category;
+
     private List<VarienceResult> data;
     private Double totalActualMTD;
     private Double totalBudgetMTD;
@@ -26,11 +29,11 @@ public class VarienceCategoryResult {
     }
 
     public String getPeriod() {
-        return period;
+        return endPeriod;
     }
 
-    public void setPeriod(String period) {
-        this.period = period;
+    public void setPeriod(String endPeriod) {
+        this.endPeriod = endPeriod;
     }
 
     public String getCategory() {
@@ -85,7 +88,7 @@ public class VarienceCategoryResult {
     public String toString() {
         return "VarienceCategoryResult{" +
                 "entityId='" + entityId + '\'' +
-                ", period='" + period + '\'' +
+                ", endPeriod='" + endPeriod + '\'' +
                 ", category='" + category + '\'' +
                 ", data=" + data +
                 ", totalActualMTD=" + totalActualMTD +

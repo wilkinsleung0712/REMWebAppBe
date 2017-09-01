@@ -7,7 +7,7 @@
     <id column="DEPARTMENT" jdbcType="CHAR" property="department" />
     <id column="BASIS" jdbcType="CHAR" property="basis" />
     <id column="BUDTYPE" jdbcType="CHAR" property="budtype" />
-    <id column="PERIOD" jdbcType="CHAR" property="period" />
+    <id column="PERIOD" jdbcType="CHAR" property="endPeriod" />
     <result column="ACTIVITY" jdbcType="DECIMAL" property="activity" />
     <result column="LASTDATE" jdbcType="TIMESTAMP" property="lastdate" />
     <result column="USERID" jdbcType="CHAR" property="userid" />
@@ -98,7 +98,7 @@
       and DEPARTMENT = #{department,jdbcType=CHAR}
       and BASIS = #{basis,jdbcType=CHAR}
       and BUDTYPE = #{budtype,jdbcType=CHAR}
-      and PERIOD = #{period,jdbcType=CHAR}
+      and PERIOD = #{endPeriod,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.colliers.mri.pojo.BudgetsKey">
     delete from BUDGETS
@@ -107,7 +107,7 @@
       and DEPARTMENT = #{department,jdbcType=CHAR}
       and BASIS = #{basis,jdbcType=CHAR}
       and BUDTYPE = #{budtype,jdbcType=CHAR}
-      and PERIOD = #{period,jdbcType=CHAR}
+      and PERIOD = #{endPeriod,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.colliers.mri.pojo.BudgetsExample">
     delete from BUDGETS
@@ -121,7 +121,7 @@
       LASTDATE, USERID, LOCKED
       )
     values (#{acctnum,jdbcType=CHAR}, #{entityid,jdbcType=CHAR}, #{department,jdbcType=CHAR}, 
-      #{basis,jdbcType=CHAR}, #{budtype,jdbcType=CHAR}, #{period,jdbcType=CHAR}, #{activity,jdbcType=DECIMAL}, 
+      #{basis,jdbcType=CHAR}, #{budtype,jdbcType=CHAR}, #{endPeriod,jdbcType=CHAR}, #{activity,jdbcType=DECIMAL},
       #{lastdate,jdbcType=TIMESTAMP}, #{userid,jdbcType=CHAR}, #{locked,jdbcType=CHAR}
       )
   </insert>
@@ -143,7 +143,7 @@
       <if test="budtype != null">
         BUDTYPE,
       </if>
-      <if test="period != null">
+      <if test="endPeriod != null">
         PERIOD,
       </if>
       <if test="activity != null">
@@ -175,8 +175,8 @@
       <if test="budtype != null">
         #{budtype,jdbcType=CHAR},
       </if>
-      <if test="period != null">
-        #{period,jdbcType=CHAR},
+      <if test="endPeriod != null">
+        #{endPeriod,jdbcType=CHAR},
       </if>
       <if test="activity != null">
         #{activity,jdbcType=DECIMAL},
@@ -216,8 +216,8 @@
       <if test="record.budtype != null">
         BUDTYPE = #{record.budtype,jdbcType=CHAR},
       </if>
-      <if test="record.period != null">
-        PERIOD = #{record.period,jdbcType=CHAR},
+      <if test="record.endPeriod != null">
+        PERIOD = #{record.endPeriod,jdbcType=CHAR},
       </if>
       <if test="record.activity != null">
         ACTIVITY = #{record.activity,jdbcType=DECIMAL},
@@ -243,7 +243,7 @@
       DEPARTMENT = #{record.department,jdbcType=CHAR},
       BASIS = #{record.basis,jdbcType=CHAR},
       BUDTYPE = #{record.budtype,jdbcType=CHAR},
-      PERIOD = #{record.period,jdbcType=CHAR},
+      PERIOD = #{record.endPeriod,jdbcType=CHAR},
       ACTIVITY = #{record.activity,jdbcType=DECIMAL},
       LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
       USERID = #{record.userid,jdbcType=CHAR},
@@ -273,7 +273,7 @@
       and DEPARTMENT = #{department,jdbcType=CHAR}
       and BASIS = #{basis,jdbcType=CHAR}
       and BUDTYPE = #{budtype,jdbcType=CHAR}
-      and PERIOD = #{period,jdbcType=CHAR}
+      and PERIOD = #{endPeriod,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.colliers.mri.pojo.Budgets">
     update BUDGETS
@@ -286,6 +286,6 @@
       and DEPARTMENT = #{department,jdbcType=CHAR}
       and BASIS = #{basis,jdbcType=CHAR}
       and BUDTYPE = #{budtype,jdbcType=CHAR}
-      and PERIOD = #{period,jdbcType=CHAR}
+      and PERIOD = #{endPeriod,jdbcType=CHAR}
   </update>
 </mapper>

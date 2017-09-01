@@ -1,11 +1,16 @@
 package com.colliers.common.variance;
 
+import com.colliers.common.type.BASIS;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class VarienceReportResult {
 
     private List<VarienceCategoryResult> categoryResultList;
+    private BASIS basis;
+    private String beginPeriod;
+    private String endPeriod;
 
     public VarienceReportResult() {
         categoryResultList = new ArrayList<>();
@@ -27,10 +32,38 @@ public class VarienceReportResult {
         this.categoryResultList.add(result);
     }
 
+    public String getBasis() {
+        return basis.getBasisCode();
+    }
+
+    public void setBasis(BASIS basis) {
+        this.basis = basis;
+    }
+
+    public String getBeginPeriod() {
+        return beginPeriod;
+    }
+
+    public void setBeginPeriod(String beginPeriod) {
+        this.beginPeriod = beginPeriod;
+    }
+
+    public String getEndPeriod() {
+        return endPeriod;
+    }
+
+    public void setEndPeriod(String endPeriod) {
+        this.endPeriod = endPeriod;
+    }
+    
     @Override
     public String toString() {
         return "VarienceReportResult{" +
                 "categoryResultList=" + categoryResultList +
+                ", basis=" + basis +
+                ", beginPeriod='" + beginPeriod + '\'' +
+                ", endPeriod='" + endPeriod + '\'' +
                 '}';
     }
+
 }

@@ -6,7 +6,7 @@
     <id column="ENTITYID" jdbcType="CHAR" property="entityid" />
     <id column="DEPARTMENT" jdbcType="CHAR" property="department" />
     <id column="BASIS" jdbcType="CHAR" property="basis" />
-    <id column="PERIOD" jdbcType="CHAR" property="period" />
+    <id column="PERIOD" jdbcType="CHAR" property="endPeriod" />
     <id column="BALFOR" jdbcType="CHAR" property="balfor" />
     <result column="ACTIVITY" jdbcType="DECIMAL" property="activity" />
   </resultMap>
@@ -93,7 +93,7 @@
       and ENTITYID = #{entityid,jdbcType=CHAR}
       and DEPARTMENT = #{department,jdbcType=CHAR}
       and BASIS = #{basis,jdbcType=CHAR}
-      and PERIOD = #{period,jdbcType=CHAR}
+      and PERIOD = #{endPeriod,jdbcType=CHAR}
       and BALFOR = #{balfor,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.colliers.mri.pojo.GlsumKey">
@@ -102,7 +102,7 @@
       and ENTITYID = #{entityid,jdbcType=CHAR}
       and DEPARTMENT = #{department,jdbcType=CHAR}
       and BASIS = #{basis,jdbcType=CHAR}
-      and PERIOD = #{period,jdbcType=CHAR}
+      and PERIOD = #{endPeriod,jdbcType=CHAR}
       and BALFOR = #{balfor,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.colliers.mri.pojo.GlsumExample">
@@ -116,7 +116,7 @@
       BASIS, PERIOD, BALFOR, ACTIVITY
       )
     values (#{acctnum,jdbcType=CHAR}, #{entityid,jdbcType=CHAR}, #{department,jdbcType=CHAR}, 
-      #{basis,jdbcType=CHAR}, #{period,jdbcType=CHAR}, #{balfor,jdbcType=CHAR}, #{activity,jdbcType=DECIMAL}
+      #{basis,jdbcType=CHAR}, #{endPeriod,jdbcType=CHAR}, #{balfor,jdbcType=CHAR}, #{activity,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.colliers.mri.pojo.Glsum">
@@ -134,7 +134,7 @@
       <if test="basis != null">
         BASIS,
       </if>
-      <if test="period != null">
+      <if test="endPeriod != null">
         PERIOD,
       </if>
       <if test="balfor != null">
@@ -157,8 +157,8 @@
       <if test="basis != null">
         #{basis,jdbcType=CHAR},
       </if>
-      <if test="period != null">
-        #{period,jdbcType=CHAR},
+      <if test="endPeriod != null">
+        #{endPeriod,jdbcType=CHAR},
       </if>
       <if test="balfor != null">
         #{balfor,jdbcType=CHAR},
@@ -189,8 +189,8 @@
       <if test="record.basis != null">
         BASIS = #{record.basis,jdbcType=CHAR},
       </if>
-      <if test="record.period != null">
-        PERIOD = #{record.period,jdbcType=CHAR},
+      <if test="record.endPeriod != null">
+        PERIOD = #{record.endPeriod,jdbcType=CHAR},
       </if>
       <if test="record.balfor != null">
         BALFOR = #{record.balfor,jdbcType=CHAR},
@@ -209,7 +209,7 @@
       ENTITYID = #{record.entityid,jdbcType=CHAR},
       DEPARTMENT = #{record.department,jdbcType=CHAR},
       BASIS = #{record.basis,jdbcType=CHAR},
-      PERIOD = #{record.period,jdbcType=CHAR},
+      PERIOD = #{record.endPeriod,jdbcType=CHAR},
       BALFOR = #{record.balfor,jdbcType=CHAR},
       ACTIVITY = #{record.activity,jdbcType=DECIMAL}
     <if test="_parameter != null">
@@ -227,7 +227,7 @@
       and ENTITYID = #{entityid,jdbcType=CHAR}
       and DEPARTMENT = #{department,jdbcType=CHAR}
       and BASIS = #{basis,jdbcType=CHAR}
-      and PERIOD = #{period,jdbcType=CHAR}
+      and PERIOD = #{endPeriod,jdbcType=CHAR}
       and BALFOR = #{balfor,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.colliers.mri.pojo.Glsum">
@@ -237,7 +237,7 @@
       and ENTITYID = #{entityid,jdbcType=CHAR}
       and DEPARTMENT = #{department,jdbcType=CHAR}
       and BASIS = #{basis,jdbcType=CHAR}
-      and PERIOD = #{period,jdbcType=CHAR}
+      and PERIOD = #{endPeriod,jdbcType=CHAR}
       and BALFOR = #{balfor,jdbcType=CHAR}
   </update>
 </mapper>

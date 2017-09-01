@@ -11,7 +11,7 @@ public class BudgetsKey {
 
     private String budtype;
 
-    private String period;
+    private String endPeriod;
 
     public String getAcctnum() {
         return acctnum;
@@ -54,10 +54,10 @@ public class BudgetsKey {
     }
 
     public String getPeriod() {
-        return period;
+        return endPeriod;
     }
 
-    public void setPeriod(String period) {
-        this.period = period == null ? null : period.trim();
+    public void setPeriod(String endPeriod) {
+        this.endPeriod = endPeriod == null ? null : endPeriod.trim();
     }
 }

@@ -467,62 +467,62 @@ public class BudgetsExample {
         }
 
         public Criteria andPeriodEqualTo(String value) {
-            addCriterion("PERIOD =", value, "period");
+            addCriterion("PERIOD =", value, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodNotEqualTo(String value) {
-            addCriterion("PERIOD <>", value, "period");
+            addCriterion("PERIOD <>", value, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodGreaterThan(String value) {
-            addCriterion("PERIOD >", value, "period");
+            addCriterion("PERIOD >", value, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodGreaterThanOrEqualTo(String value) {
-            addCriterion("PERIOD >=", value, "period");
+            addCriterion("PERIOD >=", value, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodLessThan(String value) {
-            addCriterion("PERIOD <", value, "period");
+            addCriterion("PERIOD <", value, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodLessThanOrEqualTo(String value) {
-            addCriterion("PERIOD <=", value, "period");
+            addCriterion("PERIOD <=", value, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodLike(String value) {
-            addCriterion("PERIOD like", value, "period");
+            addCriterion("PERIOD like", value, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodNotLike(String value) {
-            addCriterion("PERIOD not like", value, "period");
+            addCriterion("PERIOD not like", value, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodIn(List<String> values) {
-            addCriterion("PERIOD in", values, "period");
+            addCriterion("PERIOD in", values, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodNotIn(List<String> values) {
-            addCriterion("PERIOD not in", values, "period");
+            addCriterion("PERIOD not in", values, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodBetween(String value1, String value2) {
-            addCriterion("PERIOD between", value1, value2, "period");
+            addCriterion("PERIOD between", value1, value2, "endPeriod");
             return (Criteria) this;
         }
 
         public Criteria andPeriodNotBetween(String value1, String value2) {
-            addCriterion("PERIOD not between", value1, value2, "period");
+            addCriterion("PERIOD not between", value1, value2, "endPeriod");
             return (Criteria) this;
         }
 

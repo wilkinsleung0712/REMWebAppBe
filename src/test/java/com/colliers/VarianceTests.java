@@ -39,7 +39,7 @@ public class VarianceTests {
 
     @Test
     public void CustomDaoTests() throws Exception {
-        List<String> dataList = this.customDao.selectVarienceAccountCodeList("201122", "A", "201405", "200100", "220000");
+        List<String> dataList = this.customDao.selectVarienceAccountCodeList("201122", "A", "201405","201405", "200100", "220000");
         Assert.assertFalse(dataList.isEmpty());
     }
 }

@@ -30,7 +30,7 @@ public class Budnote extends BudnoteKey {
     }
 
     public String getUserid() {
-        return userid;
+        return userid.toUpperCase();
     }
 
     public void setUserid(String userid) {

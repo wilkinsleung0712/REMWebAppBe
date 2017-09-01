@@ -6,9 +6,58 @@
 <mapper namespace="com.colliers.mri.mapper.VarienceReportMapper">
 
     <select id="selectVarienceAccountCodeList" resultType="java.lang.String">
-        select distinct ACCTNUM from GLSUM  WHERE ENTITYID = #{entityId} AND PERIOD = #{period} and BASIS = #{basis} and acctnum like 'CI%' and REPLACE(acctnum,'CI','') between #{beginAcctRange} and #{endAcctRange}
+        select distinct ACCTNUM from GLSUM  WHERE ENTITYID = #{entityId} AND PERIOD BETWEEN #{beginPeriod} AND #{endPeriod} and BASIS = #{basis} and acctnum like 'CI%' and REPLACE(acctnum,'CI','') between #{beginAcctRange} and #{endAcctRange}
         UNION
-        select distinct ACCTNUM  from BUDGETS WHERE ENTITYID = #{entityId} AND PERIOD = #{period} and BASIS = #{basis} and acctnum like 'CI%' and REPLACE(acctnum,'CI','') between #{beginAcctRange} and #{endAcctRange}
+        select distinct ACCTNUM  from BUDGETS WHERE ENTITYID = #{entityId} AND PERIOD BETWEEN #{beginPeriod} AND #{endPeriod} and BASIS = #{basis} and acctnum like 'CI%' and REPLACE(acctnum,'CI','') between #{beginAcctRange} and #{endAcctRange}
+    </select>
+
+    <resultMap id="BaseResultMap" type="com.colliers.mri.pojo.VarienceReportBudget">
+        <id column="ACCTNUM" jdbcType="CHAR" property="acctnum"/>
+        <id column="ENTITYID" jdbcType="CHAR" property="entityid"/>
+        <id column="DEPARTMENT" jdbcType="CHAR" property="department"/>
+        <id column="BASIS" jdbcType="CHAR" property="basis"/>
+        <id column="BUDTYPE" jdbcType="CHAR" property="budtype"/>
+        <id column="PERIOD" jdbcType="CHAR" property="endPeriod"/>
+        <result column="ACTIVITY" jdbcType="DECIMAL" property="activity"/>
+        <result column="LASTDATE" jdbcType="TIMESTAMP" property="lastdate"/>
+        <result column="USERID" jdbcType="CHAR" property="userid"/>
+        <result column="LOCKED" jdbcType="CHAR" property="locked"/>
+        <result column="NOTETEXT" jdbcType="CHAR" property="noteText"/>
+    </resultMap>
+
+
+    <!--<resultMap id="HashMapResult"  type="java.util.HashMap">-->
+    <!--<result property="acctNum" jdbcType="CHAR"/>-->
+    <!--<result property="data" javaType="com.colliers.mri.pojo.VarienceReportBudget" />-->
+    <!--</resultMap>-->
+
+
+    <sql id="Variance_Report_Column_List">
+        a.ACCTNUM, a.ENTITYID, a.DEPARTMENT, a.BASIS, a.BUDTYPE, a.PERIOD, a.ACTIVITY, a.LASTDATE, a.USERID,
+        a.LOCKED, b.NOTETYPE, b.NOTETEXT
+    </sql>
+
+    <sql id="Variance_Report_Budnote_Column_List">
+        ENTITYID,NOTETYPE, NOTETEXT,ACCTNUM,BEGPD,ENDPD,BUDTYPE
+    </sql>
+
+
+    <select id="selectVarienceBudgetResult" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Variance_Report_Column_List"/>
+        from BUDGETS a
+        LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="Variance_Report_Budnote_Column_List"/>
+        FROM
+        budnote
+        ) b
+        ON a.ENTITYID = b.ENTITYID and (a.PERIOD = b.BEGPD or a.PERIOD = b.ENDPD) and a.ACCTNUM = b.ACCTNUM and
+        a.BUDTYPE = b.BUDTYPE
+        WHERE a.ENTITYID = #{entityId} AND a.PERIOD =#{endPeriod} and a.BASIS = #{basis} and a.BUDTYPE = #{budType} and
+        a.acctnum
+        like 'CI%' and REPLACE(a.acctnum,'CI','') between #{beginAcctRange} and #{endAcctRange}
     </select>
 
 </mapper>
